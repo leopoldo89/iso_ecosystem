@@ -1,0 +1,15 @@
+<odoo>
+    <record id="view_partner_form_inherit_iso" model="ir.ui.view">
+        <field name="name">view_partner_form_inherit_iso</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mobile']" position="replace">
+                <field name="certificazione_iso" string="Cert. ISO" />
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem id="base_iso_clienti_menu_section" name="Clienti" sequence="5" parent="base_iso.base_iso_menu_qualifiche"/>
+    <menuitem id="base_iso_clienti_menu" name="Clienti" sequence="1" parent="base_iso.base_iso_clienti_menu_section" action="contacts.action_contacts"/>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="partner_category_produttore" model="res.partner.category">
+        <field name="name">Produttore</field>
+    </record>
+    <record id="partner_category_importatore" model="res.partner.category">
+        <field name="name">Importatore</field>
+    </record>
+    <record id="partner_category_distributore" model="res.partner.category">
+        <field name="name">Distributore</field>
+    </record>
+    <record id="partner_category_rappresentante" model="res.partner.category">
+        <field name="name">Rappresentante</field>
+    </record>
+</odoo>

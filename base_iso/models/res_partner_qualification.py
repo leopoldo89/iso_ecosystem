@@ -65,6 +65,19 @@ class QualificationProduzioneAnnuale(models.Model):
     qualification_id = fields.Many2one('res.partner.qualification')
 
 
+class RapportoNonconformita(models.Model):
+
+    _name = 'rapporto.nonconformita'
+
+    nc_data = fields.Date()
+    nc_data_risoluzione = fields.Date()
+    nc_risolta_da = fields.Char()
+    gravita = fields.Selection(selection=[('bassa', 'Bassa'), ('media', 'Media'), ('alta', 'Alta')])
+    currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id, required=True)
+    nc_costo = fields.Monetary(currency_field="currency_id")
+    qualification_id = fields.Many2one('res.partner.qualification')
+    satisfaction_id = fields.Many2one('res.partner.satisfaction')
+
 
 class QualificaCliente(models.Model):
     _name = 'res.partner.qualification'
@@ -83,10 +96,19 @@ class QualificaCliente(models.Model):
                                                   ('24_mesi', '24 Mesi')])
 
     # campi valutazione
-    valutazione_finale = fields.Html()
+    note_finali = fields.Html()
     cliente_utilizzabile = fields.Boolean()
     data_validazione = fields.Date()
     qsm = fields.Boolean(help="Quality System Manager")
+    valutazione_finale = fields.Selection(selection=[('ideale', '1 - Ideale (85%-100%)'),
+                                                     ('valido', '2 - Valido (70%-84%)'),
+                                                     ('discreto', '3 - Discreto (55%-69%)'),
+                                                     ('critico', '4 - Critico (50%-55%)'),
+                                                     ('non_utilizzare', '5 - Non Utilizzare (40%-49%)'),
+                                                     ('depennare', '6 - Depennare (0%-39%)')])
+
+    # campi approfondimenti
+    richieste_cliente = fields.Html()
 
     # campi sezione dati finanziari
     fatturato_ids = fields.One2many('res.partner.qualification.fatturato', 'qualification_id')
@@ -101,9 +123,7 @@ class QualificaCliente(models.Model):
     certificazioni_ids = fields.One2many('qualification.certificate', 'qualification_id')
 
     # campi progettazione
-    tipo_progrettazione = fields.Selection(selection=[('interna', 'Interna'),
-                                                      ('esterna', 'esterna'),
-                                                      ('assente', 'Assente')])
+    tipo_progrettazione = fields.Selection(selection=[('interna', 'Interna'), ('esterna', 'esterna'), ('assente', 'Assente')])
     famiglia_prodotto = fields.Boolean()
     disegno_tecnico = fields.Boolean()
     prototipizzazione = fields.Boolean()
@@ -117,3 +137,56 @@ class QualificaCliente(models.Model):
 
     # campi prodotti e servizi
     articoli_ids = fields.Many2many('product.product')
+
+    # campi RNC
+    rnc_from_date = fields.Date()
+    rnc_to_date = fields.Date()
+    non_conformita_ids = fields.One2many('rapporto.nonconformita', 'qualification_id')
+
+    #campi qualita
+    q_manuale_presente = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    q_iscrizione_albi = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    q_pianificazione_vendite_acquisti = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    q_organigramma = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    q_documentazione_qualita = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    q_totale_qualita = fields.Selection(selection=[('scarso', '1-Scarso'), ('sufficiente', '2- Suff'),
+                                                   ('buono', '3-Buono'), ('alto', '4-Alto')])
+    q_note = fields.Html()
+
+
+    #campi gestione ordini
+    ordini_presente_catalogo = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    ordini_aggiornamenti = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    ordini_riesame = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    ordini_responsabile = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    ordini_orienta_acquisti = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    ordini_pianificazione_acquisti = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    ordini_totale_area = fields.Selection(selection=[('scarso', '1-Scarso'), ('sufficiente', '2- Suff'),
+                                                     ('buono', '3-Buono'), ('alto', '4-Alto')])
+    ordini_note = fields.Html()
+
+
+    # campi controlli e riesami
+    cr_riesami_fornitura = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    cr_responsabilita_riesame = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    cr_personale_qualificato = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    cr_gestione_modifiche = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    cr_dati_collaudo = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    cr_doc_riferibile = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    cr_totale_riesami = fields.Selection(selection=[('scarso', '1-Scarso'), ('sufficiente', '2- Suff'),
+                                                   ('buono', '3-Buono'), ('alto', '4-Alto')])
+    cr_note = fields.Html()
+
+
+    # campi consegne e logistica
+    cl_piani_ritiro = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    cl_organizz_trasporti = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    cl_rispetto_accordi = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    cl_conferme_ricezione = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    cl_gestione_resi = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])
+    cl_totale_logistica = fields.Float()
+    cl_note = fields.Html()
+
+
+
+

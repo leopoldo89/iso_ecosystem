@@ -69,6 +69,7 @@ class RapportoNonconformita(models.Model):
 
     _name = 'rapporto.nonconformita'
 
+    # todo includere questi campi in quality alert
     nc_data = fields.Date()
     nc_data_risoluzione = fields.Date()
     nc_risolta_da = fields.Char()
@@ -113,8 +114,8 @@ class QualificaCliente(models.Model):
     # campi sezione dati finanziari
     fatturato_ids = fields.One2many('res.partner.qualification.fatturato', 'qualification_id')
     patrimonio_ids = fields.One2many('res.partner.qualification.patrimonio', 'qualification_id')
-    anno_costituzione = fields.Integer()
-    indici_solvibilita = fields.Text()
+    data_costituzione = fields.Date()
+    indici_solvibilita = fields.Char()
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id, required=True)
     rapporto_fatturato_addetto = fields.Monetary(currency_field="currency_id")
     valutazione_finanziaria_id = fields.Many2one('qualification.financial.evaluation')
@@ -128,7 +129,7 @@ class QualificaCliente(models.Model):
     disegno_tecnico = fields.Boolean()
     prototipizzazione = fields.Boolean()
     sala_testing = fields.Boolean()
-    note_progettazione = fields.Boolean()
+    note_progettazione = fields.Html()
 
     # campi organizzazione
     addetti_annuali_ids = fields.One2many('qualification.addetti.annuali', 'qualification_id')

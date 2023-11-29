@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_partner_qualification_form" model="ir.ui.view">
+        <field name="name">view_res_partner_qualification_form</field>
+        <field name="model">res.partner.qualification</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                           Qualifica contatto
+                        </h1>
+                    </div>
+                    <group >
+                        <group id="anagrafica" string="Anagrafica">
+                            <field name="partner_id" string="Ragione Sociale" />
+                            <field name="tipo_qualifica" string="Tipo Qualifica" />
+                            <field name="data_qualifica" string="Data Qualifica"/>
+                            <field name="periodicita"/>
+                            <field name="addetto_cliente" />
+                            <field name="lead_auditor_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="Nome" />
+                                </tree>
+                            </field>
+
+                        </group>
+                        <group string="Valutazione/Validazione" id="valutazione">
+                            <field name="data_validazione" string="Data Validazione"/>
+                            <field name="cliente_utilizzabile" stirng="Cliente Utilizzabile" />
+                            <field name="qsm" string="OK QSM (Qualitu System Manager" />
+                            <field name="note_finali" string="Note Finali"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="Dati Finanziari">
+                            <group>
+                                <group id="fatturato" string="Fatturato ultimi 3 anni">
+                                    <field name="fatturato_ids">
+                                        <tree editable="bottom">
+                                            <field name="anno" string="Anno"/>
+                                            <field name="fatturato" string="Fatturato" />
+                                        </tree>
+
+                                    </field>
+                                </group>
+                                <group id="patrimonio" string="Patrimonio ultimi 3 anni">
+                                    <field name="patrimonio_ids">
+                                        <tree editable="bottom">
+                                            <field name="anno" string="Anno"/>
+                                            <field name="patrimonio" string="Patrimonio" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="data_costituzione" string="Data Costituzione" />
+                                    <field name="rapporto_fatturato_addetto" string="Rapporto fatturato x addetto"/>
+                                </group>
+                                <group>
+                                    <field name="indici_solvibilita" string="Indice Solvibilità"/>
+                                    <field name="valutazione_finanziaria_id" string="Valutazione Finanziaria"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Certificazioni">
+                            <field name="certificazioni_ids">
+                                <tree editable="bottom">
+                                    <field name="numero_norma" string="N° norma" />
+                                    <field name="titolo_norma" string="titolo"/>
+                                    <field name="validita" string="Valido fino a"/>
+                                    <field name="ente_certificazione" string="Ente di Certificazione" />
+                                    <field name="attachment_name" invisible="1"/>
+                                    <field name="attachment" filename="attachament_name" string="Allegato Pdf"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Progettazione">
+                            <group>
+                                <field name="tipo_progrettazione" string="Tipo Progettazione"/>
+                                <field name="famiglia_prodotto" string="Fam. Prodotto"/>
+                                <field name="disegno_tecnico" string="Disegno Tecnico"/>
+                                <field name="prototipizzazione" string="Prototipizzazione" />
+                                <field name="sala_testing" string="Sala Testing" />
+                            </group>
+                            <group>
+                                <field name="note_progettazione" string="Note"/>
+                            </group>
+
+                        </page>
+                        <page string="Organizzazione">
+                            <group string="Addetti">
+                                <field name="addetti_annuali_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="anno" string="Anno" />
+                                        <field name="amministrazione" string="Amministrazione" />
+                                        <field name="commerciale" string="Commerciale" />
+                                        <field name="produzione" string="Produzioine" />
+                                        <field name="ufficio_tecnico" string="Uff. Tecnico" />
+                                        <field name="logistica" string="Logistica" />
+                                        <field name="totale_addetti" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Produzione">
+                                <field name="produzione_annuale_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="anno" string="Anno"/>
+                                        <field name="reparto" string="Reparto" />
+                                        <field name="percentuale" string="% su Tot."/>
+                                        <field name="descrizione" string="Descrizione" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <field name="note_organizzazione" string="Note"/>
+                            </group>
+                        </page>
+                        <page string="Prodotti/Servizi">
+                            <field name="articoli_ids">
+                                <tree>
+                                    <field name="detailed_type" string="Tipo"/>
+                                    <field name="name" string="Nome"/>
+                                    <field name="description" string="Descrizione" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_res_partner_qualification_tree" model="ir.ui.view">
+        <field name="name">view_res_partner_qualification_tree</field>
+        <field name="model">res.partner.qualification</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id"/>
+                <field name="partner_id" string="Ragione Sociale"/>
+                <field name="data_qualifica" string="Data"/>
+                <field name="tipo_qualifica" />
+                <field name="periodicita"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_res_partner_qualification" model="ir.actions.act_window">
+        <field name="name">Qualifiche cliente</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner.qualification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="base_iso_partner_qualification_menu" name="Qualifica Iniziale" sequence="1" parent="base_iso.base_iso_clienti_menu_section" action="action_res_partner_qualification"/>
+
+</odoo>

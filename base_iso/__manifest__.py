@@ -13,8 +13,8 @@
         'security/ir.model.access.csv',
         'data/data.xml',
         'views/base_iso_views.xml',
-        'views/res_partner_qualification.xml',
         'views/res_partner_views.xml',
+        'views/res_partner_qualification.xml',
     ],
     "images": ['static/description/icon.png'],
 

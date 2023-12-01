@@ -64,20 +64,12 @@ class QualificationProduzioneAnnuale(models.Model):
     descrizione = fields.Text()
     qualification_id = fields.Many2one('res.partner.qualification')
 
-
 class RapportoNonconformita(models.Model):
 
     _name = 'rapporto.nonconformita'
+    #todo eliminare
 
-    # todo includere questi campi in quality alert
-    nc_data = fields.Date()
-    nc_data_risoluzione = fields.Date()
-    nc_risolta_da = fields.Char()
-    gravita = fields.Selection(selection=[('bassa', 'Bassa'), ('media', 'Media'), ('alta', 'Alta')])
-    currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id, required=True)
-    nc_costo = fields.Monetary(currency_field="currency_id")
-    qualification_id = fields.Many2one('res.partner.qualification')
-    satisfaction_id = fields.Many2one('res.partner.satisfaction')
+
 
 
 class QualificaCliente(models.Model):
@@ -142,7 +134,7 @@ class QualificaCliente(models.Model):
     # campi RNC
     rnc_from_date = fields.Date()
     rnc_to_date = fields.Date()
-    non_conformita_ids = fields.One2many('rapporto.nonconformita', 'qualification_id')
+    non_conformita_ids = fields.One2many('quality.alert', 'qualification_id')
 
     #campi qualita
     q_manuale_presente = fields.Selection(selection=[('si', 'SI'), ('no', 'NO'), ('non_applicabile', 'Non applicabile')])

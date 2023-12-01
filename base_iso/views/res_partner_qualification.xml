@@ -32,7 +32,7 @@
                             <field name="note_finali" string="Note Finali"/>
                         </group>
                     </group>
-                    <notebook>
+                    <notebook attrs="{'invisible':[('tipo_qualifica','!=','iniziale')]}">
                         <page name="Dati Finanziari">
                             <group>
                                 <group id="fatturato" string="Fatturato ultimi 3 anni">
@@ -126,6 +126,72 @@
                                 </tree>
                             </field>
                         </page>
+                    </notebook>
+                    <notebook attrs="{'invisible':[('tipo_qualifica','!=','periodica')]}">
+                        <page string="Approfondimenti">
+                            <group string="Note finali/richieste cliente">
+                                <field name="richieste_cliente" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Non conformita">
+                            <group>
+                                <group>
+                                    <field name="rnc_from_date" string="Dal"/>
+                                </group>
+                                <group>
+                                    <field name="rnc_to_date" string="Al"/>
+                                </group>
+                            </group>
+                            <field name="non_conformita_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="identificativo" readonly="1" optional="show"/>
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="nc_data" string="Dal"/>
+                                    <field name="nc_data_risoluzione" string="Risolta il" />
+                                    <field name="priority" widget="priority"/>
+                                    <field name="nc_costo" widget="monetary"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Qualità">
+                            <group>
+                                <group>
+                                    <field name="q_manuale_presente" string="Esiste un Manuale della qualita?" />
+                                    <field name="q_iscrizione_albi" string="Sono iscritti ad Albi, Ordini professionali di categoria?" />
+                                    <field name="q_pianificazione_vendite_acquisti" string="Pianificano acquisti e vendite?" />
+                                    <field name="q_organigramma" string="Le responsabilità sono attribuite con Organigramma?" />
+                                    <field name="q_documentazione_qualita" string="Hanno criteri documentati sulla qualità del lavoro?" />
+                                </group>
+                                <group>
+                                    <field name="q_totale_qualita" string="Valutazione dell'area qualità" />
+                                    <label string="Note Finali" for="q_note"/>
+                                    <field name="q_note" nolabel="1" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Gestione degli ordini">
+                            <group>
+                                <group string="Ordini">
+                                    <field name="ordini_presente_catalogo" string="Sono disponibili cataloghi?" />
+                                    <field name="ordini_aggiornamenti" string="Manda aggiornamenti regolarmente?" />
+                                    <field name="ordini_riesame" string="Viene svolto il riesame dell'ordine?" />
+                                    <field name="ordini_responsabile" string="Si identifica un responsabile?" />
+
+                                </group>
+                                <group string="Acquisti">
+                                    <field name="ordini_orienta_acquisti" string="Orienta agli acquisti?" />
+                                    <field name="ordini_pianificazione_acquisti" string="Esistono criteri di painificazione degli acquisti?"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Valutazione">
+                                    <field name="ordini_totale_area" string="Totale dell'area Gestione Ordini" />
+                                    <label string="Note Finali" for="ordini_note"/>
+                                    <field name="ordini_note" nolabel="1" />
+                                </group>
+                            </group>
+                        </page>
+
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">

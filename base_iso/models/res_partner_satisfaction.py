@@ -39,4 +39,4 @@ class QualificaCliente(models.Model):
     # campi RNC
     rnc_filter_data_da = fields.Date()
     rnc_filter_data_a = fields.Date()
-    non_conformita_ids = fields.One2many('rapporto.nonconformita', 'satisfaction_id')
+    non_conformita_ids = fields.One2many('quality.alert', 'satisfaction_id')

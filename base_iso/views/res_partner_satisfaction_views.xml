@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_partner_satisfaction_form" model="ir.ui.view">
+        <field name="name">view_res_partner_satisfaction_form</field>
+        <field name="model">res.partner.satisfaction</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                           Soddisfazione Cliente
+                        </h1>
+                    </div>
+                    <group >
+                        <group id="anagrafica" string="Anagrafica">
+                            <field name="partner_id" string="Ragione Sociale"/>
+                            <field name="data_verifica" string="Data Qualifica"/>
+                            <field name="addetto_vendite_id" string="Addetto Cliente"/>
+                            <field name="tipo_verifica" string="Tipo verifica" />
+
+                            <field name="lead_auditor_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="Nome" />
+                                </tree>
+                            </field>
+
+                        </group>
+
+                    </group>
+
+                    <notebook >
+                        <page string="Valutazione">
+                            <group>
+                                <group string="Percezione del cliente">
+                                    <field name="puntualita"/>
+                                    <field name="servizio_fornito" />
+                                    <field name="assistenza_post_vendita" />
+                                    <field name="supporto_tecnico" />
+                                    <field name="amministrazione" />
+                                    <field name="totale_valutazione" />
+                                </group>
+                                <group string="Varie">
+                                    <field name="note_finali" />
+                                    <field name="richieste_cliente" string="Richieste del cliente" />
+                                    <field name="data_next_audit" string="Data prossimo audit" />
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="RNC">
+                            <group>
+                                <group>
+                                    <field name="rnc_filter_data_da" string="Dal"/>
+                                </group>
+                                <group>
+                                    <field name="rnc_filter_data_a" string="Al"/>
+                                </group>
+                            </group>
+                            <field name="non_conformita_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="identificativo" readonly="1" optional="show"/>
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="nc_data" string="NC Del"/>
+                                    <field name="nc_data_risoluzione" string="Risolta il" />
+                                    <field name="nc_risolta_da" string="Risolta da" />
+                                    <field name="priority" widget="priority" string="Gravità"/>
+                                    <field name="nc_costo" widget="monetary" string="Valore in migliaia"/>
+                                </tree>
+                            </field>
+                        </page>
+
+
+
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_res_partner_satisfaction_tree" model="ir.ui.view">
+        <field name="name">view_res_partner_satisfaction_tree</field>
+        <field name="model">res.partner.satisfaction</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id"/>
+                <field name="partner_id" string="Ragione Sociale"/>
+                <field name="data_verifica" string="Data"/>
+                <field name="tipo_verifica" />
+                <field name="totale_valutazione"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--  VISTA DI RICERCA   -->
+    <record id="view_res_partner_satisfaction_search" model="ir.ui.view">
+        <field name="name">>view_res_partner_satisfaction_search</field>
+        <field name="model">res.partner.satisfaction</field>
+        <field name="arch" type="xml">
+            <search string="Ricerca">
+
+            </search>
+        </field>
+    </record>
+
+    <!--  ACTION  SODDISFAZIONE CLIENTE   -->
+    <record id="action_res_partner_satisfaction" model="ir.actions.act_window">
+        <field name="name">Soddisfazione Cliente</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner.satisfaction</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="context"></field>
+    </record>
+
+
+    <menuitem id="base_iso_partner_satisfaction_menu" name="Soddisfazione Cliente" sequence="10" parent="base_iso.base_iso_clienti_menu_section" action="action_res_partner_satisfaction"/>
+
+</odoo>

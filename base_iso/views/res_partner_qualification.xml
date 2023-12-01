@@ -13,7 +13,8 @@
                     </div>
                     <group >
                         <group id="anagrafica" string="Anagrafica">
-                            <field name="partner_id" string="Ragione Sociale" />
+                            <field name="domain_field" invisible="1" />
+                            <field name="partner_id" string="Ragione Sociale" domain="[(domain_field, '=', True)]"/>
                             <field name="tipo_qualifica" string="Tipo Qualifica" />
                             <field name="data_qualifica" string="Data Qualifica"/>
                             <field name="periodicita"/>
@@ -29,6 +30,7 @@
                             <field name="data_validazione" string="Data Validazione"/>
                             <field name="cliente_utilizzabile" stirng="Cliente Utilizzabile" />
                             <field name="qsm" string="OK QSM (Qualitu System Manager" />
+                            <field name="valutazione_finale" string="Valutazione Finale" attrs="{'invisible':[('tipo_qualifica','!=','periodica')]}" />
                             <field name="note_finali" string="Note Finali"/>
                         </group>
                     </group>
@@ -90,32 +92,33 @@
 
                         </page>
                         <page string="Organizzazione">
-                            <group string="Addetti">
-                                <field name="addetti_annuali_ids" nolabel="1">
-                                    <tree editable="bottom">
-                                        <field name="anno" string="Anno" />
-                                        <field name="amministrazione" string="Amministrazione" />
-                                        <field name="commerciale" string="Commerciale" />
-                                        <field name="produzione" string="Produzioine" />
-                                        <field name="ufficio_tecnico" string="Uff. Tecnico" />
-                                        <field name="logistica" string="Logistica" />
-                                        <field name="totale_addetti" />
-                                    </tree>
-                                </field>
-                            </group>
-                            <group string="Produzione">
-                                <field name="produzione_annuale_ids" nolabel="1">
-                                    <tree editable="bottom">
-                                        <field name="anno" string="Anno"/>
-                                        <field name="reparto" string="Reparto" />
-                                        <field name="percentuale" string="% su Tot."/>
-                                        <field name="descrizione" string="Descrizione" />
-                                    </tree>
-                                </field>
-                            </group>
-                            <group>
-                                <field name="note_organizzazione" string="Note"/>
-                            </group>
+
+                            <separator string="Addetti"/>
+                            <field name="addetti_annuali_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="anno" string="Anno" />
+                                    <field name="amministrazione" string="Amministrazione" />
+                                    <field name="commerciale" string="Commerciale" />
+                                    <field name="produzione" string="Produzioine" />
+                                    <field name="ufficio_tecnico" string="Uff. Tecnico" />
+                                    <field name="logistica" string="Logistica" />
+                                    <field name="totale_addetti" />
+                                </tree>
+                            </field>
+
+                            <separator string="Produzione"/>
+                            <field name="produzione_annuale_ids" >
+                                <tree editable="bottom">
+                                    <field name="anno" string="Anno"/>
+                                    <field name="reparto" string="Reparto" />
+                                    <field name="percentuale" string="% su Tot."/>
+                                    <field name="descrizione" string="Descrizione" />
+                                </tree>
+                            </field>
+
+                            <separator string="Note Finali"/>
+                            <field name="note_organizzazione" string="Note" nolabel="1"/>
+
                         </page>
                         <page string="Prodotti/Servizi">
                             <field name="articoli_ids">
@@ -129,9 +132,9 @@
                     </notebook>
                     <notebook attrs="{'invisible':[('tipo_qualifica','!=','periodica')]}">
                         <page string="Approfondimenti">
-                            <group string="Note finali/richieste cliente">
-                                <field name="richieste_cliente" nolabel="1"/>
-                            </group>
+
+                            <field name="richieste_cliente" nolabel="1"/>
+
                         </page>
                         <page string="Non conformita">
                             <group>
@@ -191,6 +194,37 @@
                                 </group>
                             </group>
                         </page>
+                        <page string="Controlli e riesami">
+                            <group>
+                                <group>
+                                    <field name="cr_riesami_fornitura" string="Riesaminano la richiesta di fornitura?" />
+                                    <field name="cr_responsabilita_riesame" string="Identificano modalità o responsabilità per tale riesame?" />
+                                    <field name="cr_personale_qualificato" string="Il personale è qualificato?" />
+                                    <field name="cr_gestione_modifiche" string="Gestiscono regolarmente modifiche, varianti, contestazioni?" />
+                                    <field name="cr_dati_collaudo" string="Fornisce dati tecnici di test e collaudo?" />
+                                    <field name="cr_doc_riferibile" string="Fornisce dati tecnici di test e collaudo?" />
+                                </group>
+                                <group>
+                                    <field name="cr_totale_riesami" string="Totale dell'area Controlli e Riesami"/>
+                                    <field name="cr_note" string="Note finali" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Consegne e logistica">
+                            <group>
+                                <group>
+                                    <field name="cl_piani_ritiro" string="Elabora piani di ritito?" />
+                                    <field name="cl_organizz_trasporti" string="Organizza i trasporti per i ritiri?" />
+                                    <field name="cl_rispetto_accordi" string="Rispetta gli accordi?" />
+                                    <field name="cl_conferme_ricezione" string="Inviano conferme di ricezione?" />
+                                    <field name="cl_gestione_resi" string="Gestisce i resi?" />
+                                </group>
+                                <group>
+                                    <field name="cr_totale_riesami" string="Totale dell'area Logistica" />
+                                    <field name="cr_note" string="Note finali" />
+                                </group>
+                            </group>
+                        </page>
 
                     </notebook>
                 </sheet>
@@ -217,14 +251,45 @@
         </field>
     </record>
 
+
+    <!--  VISTA DI RICERCA   -->
+    <record id="view_res_partner_qualification_search" model="ir.ui.view">
+        <field name="name">>view_res_partner_qualification_search</field>
+        <field name="model">res.partner.qualification</field>
+        <field name="arch" type="xml">
+            <search string="Ricerca">
+                <filter string="Periodica" name="periodica" domain="[('tipo_qualifica', '=', 'periodica')]"/>
+                <filter string="Iniziale" name="iniziale" domain="[('tipo_qualifica', '=', 'iniziale')]"/>
+                <group>
+                    <filter name="data_qualifica_group" string="Data qualifica"
+                            context="{'group_by':'data_qualifica'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <!--  ACTION QUALIFICA INIZIALE   -->
     <record id="action_res_partner_qualification" model="ir.actions.act_window">
-        <field name="name">Qualifiche cliente</field>
+        <field name="name">Qualifiche cliente iniziale</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner.qualification</field>
         <field name="view_mode">tree,form</field>
         <field name="target">current</field>
+        <field name="context">{'search_default_iniziale': 1, 'default_domain_field': 'is_customer'}</field>
+    </record>
+
+    <!--  ACTION QUALIFICA PERIODICA   -->
+    <record id="action_res_partner_qualification_periodica" model="ir.actions.act_window">
+        <field name="name">Qualifiche cliente periodica</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner.qualification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="context">{'search_default_periodica': 1, 'default_domain_field': 'is_customer'}</field>
     </record>
 
     <menuitem id="base_iso_partner_qualification_menu" name="Qualifica Iniziale" sequence="1" parent="base_iso.base_iso_clienti_menu_section" action="action_res_partner_qualification"/>
+    <menuitem id="base_iso_partner_qualification_periodica_menu" name="Qualifica Periodica" sequence="5" parent="base_iso.base_iso_clienti_menu_section" action="action_res_partner_qualification_periodica"/>
 
 </odoo>

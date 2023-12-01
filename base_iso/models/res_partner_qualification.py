@@ -1,5 +1,5 @@
 from odoo import api, models, fields
-
+import json
 
 class ResPartnerFatturato(models.Model):
     _name = 'res.partner.qualification.fatturato'
@@ -78,6 +78,8 @@ class QualificaCliente(models.Model):
 
     # campi anagrafica
     name = fields.Char()
+    is_supplier_form = fields.Boolean()
+    domain_field = fields.Char()
     partner_id = fields.Many2one('res.partner')
     tipo_qualifica = fields.Selection(selection=[('iniziale', 'Iniziale'), ('periodica', 'Periodica')])
     data_qualifica = fields.Date()

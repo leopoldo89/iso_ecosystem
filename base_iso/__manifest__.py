@@ -8,14 +8,17 @@
     'license': 'LGPL-3',
     'category': 'Tools',
     'version': '16.0.1',
-    'depends': ['base','partner_autocomplete', 'contacts', 'hr', 'product', 'stock', 'quality_control'],
+    'depends': ['base','partner_autocomplete', 'contacts', 'hr', 'product', 'stock',
+                'quality_control', 'partner_manual_rank'],
     'data': [
         'security/ir.model.access.csv',
         'data/data.xml',
         'views/base_iso_views.xml',
         'views/res_partner_views.xml',
         'views/res_partner_qualification.xml',
+        'views/res_partner_satisfaction_views.xml'
     ],
     "images": ['static/description/icon.png'],
+    "application": True
 
 }

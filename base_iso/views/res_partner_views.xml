@@ -11,5 +11,4 @@
     </record>
 
     <menuitem id="base_iso_clienti_menu_section" name="Clienti" sequence="5" parent="base_iso.base_iso_menu_qualifiche"/>
-    <menuitem id="base_iso_clienti_menu" name="Clienti" sequence="1" parent="base_iso.base_iso_clienti_menu_section" action="contacts.action_contacts"/>
 </odoo>

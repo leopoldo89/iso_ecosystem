@@ -1,9 +1,9 @@
 from odoo import api, models, fields
 
 
-class HrEmployeeSkill(models.Model):
-    _inherit = 'hr.employee.skill'
-    requested_skill_leveò_id = fields.Many2one('hr.skill.level')
+# class HrEmployeeSkill(models.Model):
+#     _inherit = 'hr.employee.skill'
+#     requested_skill_leveò_id = fields.Many2one('hr.skill.level')
 
 class QualificaDipendente(models.Model):
     _name = 'hr.employee.qualification'

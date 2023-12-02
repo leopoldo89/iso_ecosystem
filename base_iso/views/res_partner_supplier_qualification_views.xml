@@ -14,11 +14,16 @@
             <xpath expr="//field[@name='richieste_partner']" position="attributes">
                 <attribute name="string">Richieste Fornitore</attribute>
             </xpath>
+            <xpath expr="//h1" position="replace">
+                <h1>
+                    Qualifica Fornitore
+                </h1>
+            </xpath>
         </field>
     </record>
 
 
-    <!--  ACTION QUALIFICA INIZIALE   CLIENTE-->
+    <!--  ACTION QUALIFICA INIZIALE   FORNITORE-->
     <record id="action_res_partner_supplier_qualification" model="ir.actions.act_window">
         <field name="name">Qualifica Fornitore iniziale</field>
         <field name="type">ir.actions.act_window</field>
@@ -28,7 +33,7 @@
         <field name="context">{'search_default_iniziale': 1, 'default_domain_field': 'is_supplier'}</field>
     </record>
 
-    <!--  ACTION QUALIFICA PERIODICA CLIENTE -->
+    <!--  ACTION QUALIFICA PERIODICA FORNITORE -->
     <record id="action_res_partner_supplier_qualification_periodica" model="ir.actions.act_window">
         <field name="name">Qualifiche Fornitore periodica</field>
         <field name="type">ir.actions.act_window</field>

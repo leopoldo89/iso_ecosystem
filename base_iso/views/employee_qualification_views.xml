@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_qualification_form" model="ir.ui.view">
+        <field name="name">view_employee_qualification_form</field>
+        <field name="model">hr.employee.qualification</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Anagrafica">
+
+                            <field name="employee_id" string="Collaboratore" />
+                            <field name="funzione_aziendale_id" string="FA prevista"/>
+                            <field name="tipo_qualifica" string="Tipo Qualifica" />
+                            <field name="data_qualifica" string="Data Qualifica"/>
+                            <field name="data_prev_qualifica" string="Data precedente qualifica" />
+                            <field name="verifier_employee_id" string="Verificatore"/>
+                        </group>
+                        <group string="Valutazione">
+                            <field name="valutazione_finale" string="Valutazione Finale" />
+                            <field name="note_finali" string="Note Finali"/>
+                            <field name="data_next_qualifica" string="Data prossima qualifica" />
+                            <field name="formazione_pianificata" string="Formazione Pianificata" />
+                            <field name="entro_il" string="entro_il" />
+                            <field name="ingaggiabile" string="Ingaggiabile" attrs="{'invisible':[('tipo_qualifica','!=','iniziale')]}"/>
+                        </group>
+                    </group>
+                    <notebook attrs="{'invisible':[('tipo_qualifica','!=','iniziale')]}" >
+                        <page name="Verifica competenze">
+                            <field name="hr_skill_ids">
+                                <tree editable="bottom">
+                                    <field name="skill_type_id" string="Tipo competenza" />
+                                    <field name="skill_id" string="Competenza" domain="[('skill_type_id', '=', skill_type_id)]" />
+                                    <field name="requested_skill_level_id" string="Valore Richiesto" domain="[('skill_type_id', '=', skill_type_id)]"/>
+                                    <field name="skill_level_id" string="Valore Attuale" />
+                                    <field name="attestati" />
+                                    <field name="accettabile" string="Accettabile?" />
+                                    <field name="da_formare" string="Da formare?" />
+                                    <field name="note" string="Note Finali"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <notebook attrs="{'invisible':[('tipo_qualifica','!=','periodica')]}" >
+                        <page string="Non conformita">
+                            <group>
+                                <group>
+                                    <field name="rnc_filter_data_da" string="Dal"/>
+                                </group>
+                                <group>
+                                    <field name="rnc_filter_data_a" string="Al"/>
+                                </group>
+                            </group>
+                            <field name="non_conformita_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="identificativo" readonly="1" optional="show"/>
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="nc_data" string="Dal"/>
+                                    <field name="nc_data_risoluzione" string="Risolta il" />
+                                    <field name="nc_risolta_da" string="Risolta Da" />
+                                    <field name="priority" widget="priority"/>
+                                    <field name="nc_costo" widget="monetary"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Formazione">
+                            <group>
+                                <group>
+                                    <field name="rnc_filter_data_formazione_da" string="Dal"/>
+                                </group>
+                                <group>
+                                    <field name="rnc_filter_data_formazione_a" string="Al"/>
+                                </group>
+                            </group>
+                            <field name="formazione_non_conformita_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="identificativo" readonly="1" optional="show"/>
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="nc_data" string="Dal"/>
+                                    <field name="nc_data_risoluzione" string="Risolta il" />
+                                    <field name="nc_risolta_da" string="Risolta Da" />
+                                    <field name="priority" widget="priority"/>
+                                    <field name="nc_costo" widget="monetary"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_employee_qualification_tree" model="ir.ui.view">
+        <field name="name">view_employee_qualification_tree</field>
+        <field name="model">hr.employee.qualification</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id"/>
+                <field name="employee_id" string="Collaboratore"/>
+                <field name="data_qualifica" string="Data"/>
+                <field name="tipo_qualifica" />
+            </tree>
+        </field>
+    </record>
+
+
+    <!--  VISTA DI RICERCA   -->
+    <record id="view_employee_qualification_search" model="ir.ui.view">
+        <field name="name">>view_employee_qualification_search</field>
+        <field name="model">hr.employee.qualification</field>
+        <field name="arch" type="xml">
+            <search string="Ricerca">
+                <filter string="Periodica" name="periodica" domain="[('tipo_qualifica', '=', 'periodica')]"/>
+                <filter string="Iniziale" name="iniziale" domain="[('tipo_qualifica', '=', 'iniziale')]"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!--  ACTION QUALIFICA INIZIALE   COLLABORATORE-->
+    <record id="action_employee_qualification" model="ir.actions.act_window">
+        <field name="name">Qualifica Collaboratore iniziale</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.employee.qualification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="context">{'search_default_iniziale': 1}</field>
+    </record>
+
+    <!--  ACTION QUALIFICA PERIODICA COLLABORATORE -->
+    <record id="action_employee_qualification_periodica" model="ir.actions.act_window">
+        <field name="name">Qualifiche Collaboratore periodica</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.employee.qualification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="context">{'search_default_periodica': 1}</field>
+    </record>
+
+    <menuitem id="base_iso_collaboratori_menu_section" name="Collaboratori" sequence="15" parent="base_iso.base_iso_menu_qualifiche"/>
+    <menuitem id="base_iso_partner_employee_qualification_menu" name="Qualifica Iniziale" sequence="1" parent="base_iso.base_iso_collaboratori_menu_section" action="action_employee_qualification"/>
+    <menuitem id="base_iso_partner_employee_qualification_periodica_menu" name="Qualifica Periodica" sequence="5" parent="base_iso.base_iso_collaboratori_menu_section" action="action_employee_qualification_periodica"/>
+    <menuitem id="base_iso_funzioni_aziendali_menu" name="Funzioni aziendali" sequence="10" action="hr.action_hr_job" parent="base_iso.base_iso_collaboratori_menu_section"
+/>
+
+</odoo>

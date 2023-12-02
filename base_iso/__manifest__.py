@@ -8,8 +8,8 @@
     'license': 'LGPL-3',
     'category': 'Tools',
     'version': '16.0.1',
-    'depends': ['base','partner_autocomplete', 'contacts', 'hr', 'product', 'stock',
-                'quality_control', 'partner_manual_rank'],
+    'depends': ['base','partner_autocomplete', 'contacts', 'hr', 'hr_skills', 'product', 'stock',
+                'quality_control', 'partner_manual_rank' ],
     'data': [
         'security/ir.model.access.csv',
         'data/data.xml',
@@ -18,6 +18,8 @@
         'views/res_partner_qualification.xml',
         'views/res_partner_satisfaction_views.xml',
         'views/res_partner_supplier_qualification_views.xml',
+        'views/employee_qualification_views.xml',
+        'views/employee_scheda_valutazione_views.xml',
     ],
     "images": ['static/description/icon.png'],
     "application": True

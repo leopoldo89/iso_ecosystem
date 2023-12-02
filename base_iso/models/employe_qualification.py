@@ -1,14 +1,22 @@
 from odoo import api, models, fields
 
 
-# class HrEmployeeSkill(models.Model):
-#     _inherit = 'hr.employee.skill'
-#     requested_skill_leveò_id = fields.Many2one('hr.skill.level')
+class HrEmployeeSkill(models.Model):
+
+    _inherit = 'hr.employee.skill'
+
+    # campi per verifica competenze
+    requested_skill_level_id = fields.Many2one('hr.skill.level')
+    attestati = fields.Text()
+    accettabile = fields.Boolean()
+    da_formare = fields.Boolean()
+    note = fields.Text()
+    qualification_id = fields.Many2one('hr.employee.qualification')
 
 class QualificaDipendente(models.Model):
+
     _name = 'hr.employee.qualification'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-
 
 
     # campi anagrafica
@@ -31,4 +39,17 @@ class QualificaDipendente(models.Model):
     entro_il = fields.Date()
     ingaggiabile = fields.Boolean()
 
+    # todo valutare se popolare in automatico questa tabella con i dati presi direttamente dall'employee_id
+    hr_skill_ids = fields.One2many('hr.employee.skill', 'qualification_id')
 
+
+    # campi RNC
+    rnc_filter_data_da = fields.Date()
+    rnc_filter_data_a = fields.Date()
+    non_conformita_ids = fields.One2many('quality.alert', 'employee_qualification_id')
+
+
+    # campi formazione
+    rnc_filter_data_formazione_da = fields.Date()
+    rnc_filter_data_formazione_a = fields.Date()
+    formazione_non_conformita_ids = fields.One2many('quality.alert', 'employee_formazione_qualification_id')

@@ -8,7 +8,7 @@
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                           Qualifica contatto
+                           Qualifica Cliente
                         </h1>
                     </div>
                     <group >
@@ -74,7 +74,7 @@
                                     <field name="validita" string="Valido fino a"/>
                                     <field name="ente_certificazione" string="Ente di Certificazione" />
                                     <field name="attachment_name" invisible="1"/>
-                                    <field name="attachment" filename="attachament_name" string="Allegato Pdf"/>
+                                    <field name="attachment" filename="attachament_name" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
                                 </tree>
                             </field>
                         </page>
@@ -151,6 +151,7 @@
                                     <field name="description" string="Descrizione"/>
                                     <field name="nc_data" string="Dal"/>
                                     <field name="nc_data_risoluzione" string="Risolta il" />
+                                    <field name="nc_risolta_da" string="Risolta Da" />
                                     <field name="priority" widget="priority"/>
                                     <field name="nc_costo" widget="monetary"/>
                                 </tree>

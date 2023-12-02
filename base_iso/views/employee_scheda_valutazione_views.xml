@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_scheda_valutazione_form" model="ir.ui.view">
+        <field name="name">view_employee_scheda_valutazione_form</field>
+        <field name="model">employee.scheda.valutazione</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Anagrafica">
+                        <group>
+                            <field name="employee_id" string="Collaboratore" />
+                            <field name="deciso_da_employee_id" string="Deciso Da"/>
+                            <field name="deciso_il" string="Deciso Il" />
+                            <field name="entro_il" string="Entro Il " />
+                        </group>
+                        <group >
+                            <field name="argomento_formazione" string="Argomento della formazione" />
+                            <field name="tipo" string="Tipo" />
+                            <field name="tutor_interno_id" string="Tutor interno" />
+                            <field name="tutor_esterno_id" string="Tutor esterno" />
+                        </group>
+                    </group>
+                    <notebook >
+                        <page name="Fruizione">
+                            <group>
+                                <group >
+                                    <field name="f_iniziata_il" string="Iniziata il" />
+                                    <field name="f_terminata_il" string="Terminata il" />
+                                </group>
+                                <group>
+                                    <field name="f_verificare_entro_il" string="Verificata entro il" />
+                                    <field name="f_attachment_name" invisible="1"/>
+                                    <field name="f_attachment" filename="attachament_name" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="esito">
+                                    <field name="f_esito" nolabel="1" />
+                                </group>
+                                <group string="Note">
+                                    <field name="f_note" nolabel="1" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Verifica/Efficacia">
+                            <group>
+                                <group>
+                                    <field name="v_vericatore_interno_id" string="Verificatore Interno" />
+                                    <field name="v_verificato_il" string="Verificato il" />
+                                    <field name="v_valutazione" string="Valutazione" />
+                                </group>
+                                <group>
+                                    <field name="v_validato_da_id" string="Validato da" />
+                                    <field name="v_riprendere_il" string="Riprendere il" />
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Risultato">
+                                    <field name="v_risultato" nolabel="1" />
+                                </group>
+                                <group string="Note">
+                                    <field name="v_efficacia" nolabel="1" />
+                                </group>
+                            </group>
+                            <group string="Note finali">
+                                <field name="v_note_finali" nolabel="1" />
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_employee_scheda_valutazione_tree" model="ir.ui.view">
+        <field name="name">view_employee_scheda_valutazione_tree</field>
+        <field name="model">employee.scheda.valutazione</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id"/>
+                <field name="employee_id" string="Collaboratore"/>
+                <field name="deciso_da_employee_id" string="Deciso Da"/>
+                <field name="deciso_il" string="Deciso Il" />
+                <field name="argomento_formazione" string="Argomento della formazione" />
+                <field name="tipo" string="tipo" />
+            </tree>
+        </field>
+    </record>
+
+
+    <!--  VISTA DI RICERCA   -->
+    <record id="view_employee_scheda_valutazione_search" model="ir.ui.view">
+        <field name="name">>view_employee_scheda_valutazione_search</field>
+        <field name="model">employee.scheda.valutazione</field>
+        <field name="arch" type="xml">
+            <search string="Ricerca">
+
+            </search>
+        </field>
+    </record>
+
+
+    <!--  ACTION  SCHEDA VALUTAZIONE COLLABORATORE-->
+    <record id="action_employee_scheda_valutazione" model="ir.actions.act_window">
+        <field name="name">Scheda valutazione collaboratore</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">employee.scheda.valutazione</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+
+    <menuitem id="base_iso_partner_employee_scheda_valutazione_menu" name="Scheda Valutazione" sequence="6" parent="base_iso.base_iso_collaboratori_menu_section" action="action_employee_scheda_valutazione"/>
+
+
+</odoo>

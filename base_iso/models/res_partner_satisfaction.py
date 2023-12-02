@@ -32,7 +32,7 @@ class QualificaCliente(models.Model):
     amministrazione = fields.Selection(selection=[('scarso', '1-Scarso'), ('sufficiente', '2- Suff'),
                                                      ('buono', '3-Buono'), ('alto', '4-Alto')])
     note_finali = fields.Html()
-    richieste_cliente = fields.Html()
+    richieste_partner = fields.Html()
     data_next_audit = fields.Date()
 
 

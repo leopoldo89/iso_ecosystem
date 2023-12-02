@@ -84,7 +84,7 @@ class QualificaCliente(models.Model):
     tipo_qualifica = fields.Selection(selection=[('iniziale', 'Iniziale'), ('periodica', 'Periodica')])
     data_qualifica = fields.Date()
     lead_auditor_ids = fields.Many2many('hr.employee')
-    addetto_cliente = fields.Many2one('res.partner')
+    addetto_partner_id = fields.Many2one('res.partner')
     periodicita = fields.Selection(selection=[('3_mesi', '3 Mesi'),
                                                   ('6_mesi', '6 Mesi'),
                                                   ('12_mesi', '12 Mesi'),
@@ -92,7 +92,7 @@ class QualificaCliente(models.Model):
 
     # campi valutazione
     note_finali = fields.Html()
-    cliente_utilizzabile = fields.Boolean()
+    partner_utilizzabile = fields.Boolean()
     data_validazione = fields.Date()
     qsm = fields.Boolean(help="Quality System Manager")
     valutazione_finale = fields.Selection(selection=[('ideale', '1 - Ideale (85%-100%)'),
@@ -102,8 +102,11 @@ class QualificaCliente(models.Model):
                                                      ('non_utilizzare', '5 - Non Utilizzare (40%-49%)'),
                                                      ('depennare', '6 - Depennare (0%-39%)')])
 
-    # campi approfondimenti
-    richieste_cliente = fields.Html()
+
+
+    # ==============================================================================================
+    #                                   CAMPI VALUTAZIONE INIZIALE
+    # ==============================================================================================
 
     # campi sezione dati finanziari
     fatturato_ids = fields.One2many('res.partner.qualification.fatturato', 'qualification_id')
@@ -132,6 +135,17 @@ class QualificaCliente(models.Model):
 
     # campi prodotti e servizi
     articoli_ids = fields.Many2many('product.product')
+
+
+
+
+    # ==============================================================================================
+    #                                          CAMPI VALUTAZIONE PERIODICA
+    # ==============================================================================================
+
+
+    # campi approfondimenti
+    richieste_partner = fields.Html()
 
     # campi RNC
     rnc_from_date = fields.Date()

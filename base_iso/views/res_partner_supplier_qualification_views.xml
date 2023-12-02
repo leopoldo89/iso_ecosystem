@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_partner_supplier_qualification_form" model="ir.ui.view">
+        <field name="name">view_res_partner_qualification_supplier_form</field>
+        <field name="model">res.partner.qualification</field>
+        <field name="inherit_id" ref="base_iso.view_res_partner_qualification_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_utilizzabile']" position="attributes">
+                <attribute name="string">Fornitore Utilizzabile?</attribute>
+            </xpath>
+            <xpath expr="//field[@name='addetto_partner_id']" position="attributes">
+                <attribute name="string">Addetto Fornitore</attribute>
+            </xpath>
+            <xpath expr="//field[@name='richieste_partner']" position="attributes">
+                <attribute name="string">Richieste Fornitore</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--  ACTION QUALIFICA INIZIALE   CLIENTE-->
+    <record id="action_res_partner_supplier_qualification" model="ir.actions.act_window">
+        <field name="name">Qualifica Fornitore iniziale</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner.qualification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="context">{'search_default_iniziale': 1, 'default_domain_field': 'is_supplier'}</field>
+    </record>
+
+    <!--  ACTION QUALIFICA PERIODICA CLIENTE -->
+    <record id="action_res_partner_supplier_qualification_periodica" model="ir.actions.act_window">
+        <field name="name">Qualifiche Fornitore periodica</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner.qualification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="context">{'search_default_periodica': 1, 'default_domain_field': 'is_supplier'}</field>
+    </record>
+
+    <menuitem id="base_iso_fornitori_menu_section" name="Fornitori" sequence="10" parent="base_iso.base_iso_menu_qualifiche"/>
+    <menuitem id="base_iso_partner_supplier_qualification_menu" name="Qualifica Iniziale" sequence="1" parent="base_iso.base_iso_fornitori_menu_section" action="action_res_partner_supplier_qualification"/>
+    <menuitem id="base_iso_partner_supplier_qualification_periodica_menu" name="Qualifica Periodica" sequence="5" parent="base_iso.base_iso_fornitori_menu_section" action="action_res_partner_supplier_qualification_periodica"/>
+
+</odoo>

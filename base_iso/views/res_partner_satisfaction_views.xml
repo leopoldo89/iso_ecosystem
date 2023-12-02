@@ -41,7 +41,7 @@
                                 </group>
                                 <group string="Varie">
                                     <field name="note_finali" />
-                                    <field name="richieste_cliente" string="Richieste del cliente" />
+                                    <field name="richieste_partner" string="Richieste del cliente" />
                                     <field name="data_next_audit" string="Data prossimo audit" />
                                 </group>
                             </group>

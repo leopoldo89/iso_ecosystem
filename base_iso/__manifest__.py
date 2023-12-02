@@ -16,7 +16,8 @@
         'views/base_iso_views.xml',
         'views/res_partner_views.xml',
         'views/res_partner_qualification.xml',
-        'views/res_partner_satisfaction_views.xml'
+        'views/res_partner_satisfaction_views.xml',
+        'views/res_partner_supplier_qualification_views.xml',
     ],
     "images": ['static/description/icon.png'],
     "application": True

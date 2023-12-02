@@ -12,6 +12,7 @@ class HrEmployeeSkill(models.Model):
     da_formare = fields.Boolean()
     note = fields.Text()
     qualification_id = fields.Many2one('hr.employee.qualification')
+    job_id = fields.Many2one('hr.job')
 
 class QualificaDipendente(models.Model):
 

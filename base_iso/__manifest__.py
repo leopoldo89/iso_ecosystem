@@ -9,7 +9,7 @@
     'category': 'Tools',
     'version': '16.0.1',
     'depends': ['base','partner_autocomplete', 'contacts', 'hr', 'hr_skills', 'product', 'stock',
-                'quality_control', 'partner_manual_rank' ],
+                'quality_control', 'partner_manual_rank', 'mrp', 'maintenance', 'stock_barcode'],
     'data': [
         'security/ir.model.access.csv',
         'data/data.xml',
@@ -20,6 +20,7 @@
         'views/res_partner_supplier_qualification_views.xml',
         'views/employee_qualification_views.xml',
         'views/employee_scheda_valutazione_views.xml',
+        'views/funzione_aziendale_views.xml'
     ],
     "images": ['static/description/icon.png'],
     "application": True

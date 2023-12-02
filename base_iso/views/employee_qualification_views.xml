@@ -145,7 +145,5 @@
     <menuitem id="base_iso_collaboratori_menu_section" name="Collaboratori" sequence="15" parent="base_iso.base_iso_menu_qualifiche"/>
     <menuitem id="base_iso_partner_employee_qualification_menu" name="Qualifica Iniziale" sequence="1" parent="base_iso.base_iso_collaboratori_menu_section" action="action_employee_qualification"/>
     <menuitem id="base_iso_partner_employee_qualification_periodica_menu" name="Qualifica Periodica" sequence="5" parent="base_iso.base_iso_collaboratori_menu_section" action="action_employee_qualification_periodica"/>
-    <menuitem id="base_iso_funzioni_aziendali_menu" name="Funzioni aziendali" sequence="10" action="hr.action_hr_job" parent="base_iso.base_iso_collaboratori_menu_section"
-/>
 
 </odoo>

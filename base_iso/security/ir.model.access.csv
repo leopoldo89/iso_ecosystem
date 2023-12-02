@@ -9,4 +9,4 @@ access_res_partner_qualification,access_res_partner_qualification,model_res_part
 access_res_partner_satisfaction,access_res_partner_satisfaction,model_res_partner_satisfaction,base.group_user,1,1,1,1
 access_hr_employee_qualification,access_hr_employee_qualification,model_hr_employee_qualification,base.group_user,1,1,1,1
 access_employee_scheda_valutazione,access_employee_scheda_valutazione,model_employee_scheda_valutazione,base.group_user,1,1,1,1
-
+access_hr_job_qualifica,access_hr_job_qualifica,model_hr_job_qualifica,base.group_user,1,1,1,1

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_job_form_inherit" model="ir.ui.view">
+        <field name="name">funzione_aziendale_form</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <group>
+                    <group>
+                        <field name="department_id" string="Dipartimento" />
+                        <field name="sigla_fa" string="Sigla FA" />
+                        <field name="responsible_employee_ids" string="Responsabile Di:">
+                            <tree>
+                                <field name="name" string="Nome" />
+                                <field name="job_id" string="FA Primaria" />
+                            </tree>
+                        </field>
+                        <field name="livello_gerarchia" />
+                        <field name="risponde_a" />
+                    </group>
+                </group>
+
+            </xpath>
+            <xpath expr="//page[@name='job_description_page']" position="after" >
+                <page string="Qualifiche">
+                    <field name="qualifiche_ids">
+                        <tree editable="bottom">
+                            <field name="name" string="Descrizione" />
+                            <field name="riferimenti_legge" string="Riferimenti di legge" />
+                            <field name="punteggio_minimo" />
+                            <field name="note" />
+                        </tree>
+                    </field>
+
+                </page>
+                <page string="Competenze">
+                    <field name="skill_ids">
+                        <tree editable="bottom">
+                            <field name="skill_type_id" string="Tipo competenza" />
+                            <field name="skill_id" string="Competenza" domain="[('skill_type_id', '=', skill_type_id)]" />
+                            <field name="requested_skill_level_id" string="Valore Richiesto" domain="[('skill_type_id', '=', skill_type_id)]"/>
+                            <field name="note" string="Note Finali"/>
+                        </tree>
+                    </field>
+
+                </page>
+                <page string="Addetti alla funzione">
+                    <field name="employee_ids">
+                        <tree>
+                            <field name="name" string="Nome"/>
+                            <field name="department_id" />
+                        </tree>
+                    </field>
+                </page>
+                <xpath expr="//page[@name='recruitment_page']" position="move"/>
+            </xpath>
+            <xpath expr="//page[@name='job_description_page']" position="attributes" >
+                <field name="string">Mansionario</field>
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+    <menuitem id="base_iso_funzioni_aziendali_menu" name="Funzioni aziendali" sequence="10" action="hr.action_hr_job" parent="base_iso.base_iso_collaboratori_menu_section"/>
+</odoo>

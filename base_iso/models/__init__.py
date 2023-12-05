@@ -5,3 +5,5 @@ from . import quality_alert
 from . import employe_qualification
 from . import employee_scheda_valutazione
 from . import funzione_aziendale
+from . import maintenance_equipment
+from . import maintenance_request

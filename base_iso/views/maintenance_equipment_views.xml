@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_maintenance_equipment_form_inherit_iso" model="ir.ui.view">
+        <field name="name">view_maintenance_equipment_form_inherit_iso</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="priority">18</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="before">
+                <field name="internal_reference" string="Cod. Interno" />
+                <field name="barcode" />
+            </xpath>
+
+            <xpath expr="//field[@name='workcenter_id']" position="after">
+                <field name="macchinario_id" string="Macchinario" />
+            </xpath>
+
+            <xpath expr="//field[@name='note']" position="after">
+                <field name="documentazione_ids">
+                    <tree editable="bottom">
+                        <field name="date" string="Data" />
+                        <field name="description" string="Descrizione"/>
+                        <field name="attachment_name" invisible="1"/>
+                        <field name="attachment" filename="attachament_name" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                    </tree>
+                </field>
+                <field name="note" />
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="produttore" string="Produttore" />
+            </xpath>
+
+            <xpath expr="//page[@name='product_information']/group" position="after">
+                <group>
+                    <group>
+                        <field name="modifiche_revisioni" string="Modifiche/Revisioni"/>
+                        <field name="anno_revisione" string="Anno revisione"/>
+                        <field name="revisionatore" string="Revisionatore"/>
+                        <field name="costo_revisione" />
+                    </group>
+                </group>
+            </xpath>
+
+            <xpath expr="//field[@name='next_action_date']" position="before">
+                <field name="descrizione_manutenzione" string="Descrizione Manutenzione" />
+            </xpath>
+
+            <xpath expr="//page[@name='maintenance']" position="inside">
+                <field name="ricambi_consumi_ids">
+                    <tree>
+                        <field name="name"></field>
+                        <field name="barcode" />
+                        <field name="default_code" />
+                        <field name="detailed_type" />
+                    </tree>
+                </field>
+                <field name="maintenance_ids">
+                    <tree>
+                        <field name="schedule_date" string="Data" />
+                        <field name="name" string="Descrizione" />
+                        <field name="maintenance_type" string="Tipo Manutenzione" />
+                        <field name="costo_manutenzione" string="Costo" />
+                    </tree>
+                </field>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="tarature" string="Tarature">
+                    <group>
+                        <field name="taratura_ids" string="Indicatori Taratura" widget="many2many_tags"/>
+                    </group>
+                    <field name="taratura_value_ids">
+                        <tree editable="bottom">
+                            <field name="taratura_id" string="indicatore"/>
+                            <field name="data_taratura" string="Data Taratura"/>
+                            <field name="costo_totale" string="Costo taratura" />
+                            <field name="note" string="Note Finali" />
+                            <field name="next_taratura_date" string="Prossima Taratura"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

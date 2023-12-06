@@ -7,3 +7,4 @@ from . import employee_scheda_valutazione
 from . import funzione_aziendale
 from . import maintenance_equipment
 from . import maintenance_request
+from . import maintenance_request_operation

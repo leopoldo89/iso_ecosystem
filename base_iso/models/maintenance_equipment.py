@@ -60,3 +60,9 @@ class MaintenanceEquipment(models.Model):
     taratura_ids = fields.Many2many('maintenance.equipment.taratura')
     taratura_value_ids = fields.One2many('maintenance.equipment.taratura.value', 'equipment_id')
 
+    # campi macchina utensile
+    fabbricante = fields.Many2one('res.partner')
+    anno_fabbricazione = fields.Date()
+    assistenza = fields.Many2many('res.partner')
+    request_operation_ids = fields.One2many('maintenance.request.operation', 'maintenance_equipment_id')
+

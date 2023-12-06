@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+
+    <!--  CATEGORIE/TAG CONTATTO (RES.PARTNER)  -->
     <record id="partner_category_produttore" model="res.partner.category">
         <field name="name">Produttore</field>
     </record>
@@ -11,5 +13,36 @@
     </record>
     <record id="partner_category_rappresentante" model="res.partner.category">
         <field name="name">Rappresentante</field>
+    </record>
+
+
+    <!--  TIPOLOGIE DI RISORTA TECNICA/ATTREZZATURA  -->
+    <record id="equipment_category_attrezzature" model="maintenance.equipment.category">
+        <field name="name">Attrezzature</field>
+        <field name="note">Avvitatori, punzonatrici, trapani, martelli pneumatici etc.</field>
+    </record>
+    <record id="equipment_category_macchine_utensili" model="maintenance.equipment.category">
+        <field name="name">Macchine utensili</field>
+        <field name="note">Torni, rettifiche, alesatrici, Centri di lavoro, etc</field>
+    </record>
+    <record id="equipment_category_macchinari" model="maintenance.equipment.category">
+        <field name="name">Macchinari</field>
+        <field name="note">Muletti, transpallet, sollevatori etc.</field>
+    </record>
+    <record id="equipment_category_impianti" model="maintenance.equipment.category">
+        <field name="name">Impianti</field>
+        <field name="note">Fotovoltaico,elettrico, aria compressa, idraulici, scarico, depurazione etc.</field>
+    </record>
+    <record id="equipment_category_strumenti_misura" model="maintenance.equipment.category">
+        <field name="name">Strumenti di misura </field>
+        <field name="note">Soggetti a periodica taratura (Strumenti laser, micrometri, calibri, dinamometriche, spessometri, strumenti di laboratorio, etc,)</field>
+    </record>
+    <record id="equipment_category_strumenti_generici" model="maintenance.equipment.category">
+        <field name="name">Strumenti/attrezzi generici</field>
+        <field name="note">Cacciaviti, martelli chiavi inglesi etc.</field>
+    </record>
+    <record id="equipment_category_strumenti_elettronici" model="maintenance.equipment.category">
+        <field name="name">Strumenti elettronici o informatici</field>
+        <field name="note">Computer, server, stampanti, etc.</field>
     </record>
 </odoo>

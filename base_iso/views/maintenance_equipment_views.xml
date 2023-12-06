@@ -16,6 +16,7 @@
             </xpath>
 
             <xpath expr="//field[@name='note']" position="after">
+                <separator string="Documentazione"/>
                 <field name="documentazione_ids">
                     <tree editable="bottom">
                         <field name="date" string="Data" />
@@ -24,11 +25,25 @@
                         <field name="attachment" filename="attachament_name" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
                     </tree>
                 </field>
+                <separator string="note"/>
                 <field name="note" />
             </xpath>
 
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="produttore" string="Produttore" />
+            </xpath>
+
+            <xpath expr="//field[@name='model']" position="after">
+                <field name="fabbricante" string="Fabbricante" />
+                <field name="anno_fabbricazione" />
+                <field name="assistenza">
+                    <tree>
+                        <field name="name" string="Nome" />
+                        <field name="mobile" string="Cellulare" />
+                        <field name="phone" string="Telefono" />
+                    </tree>
+                </field>
+
             </xpath>
 
             <xpath expr="//page[@name='product_information']/group" position="after">
@@ -47,6 +62,7 @@
             </xpath>
 
             <xpath expr="//page[@name='maintenance']" position="inside">
+                <separator string="Ricambi / materiali di consumo" />
                 <field name="ricambi_consumi_ids">
                     <tree>
                         <field name="name"></field>
@@ -55,6 +71,8 @@
                         <field name="detailed_type" />
                     </tree>
                 </field>
+
+                <separator string="Richieste di manutenzione" />
                 <field name="maintenance_ids">
                     <tree>
                         <field name="schedule_date" string="Data" />
@@ -63,6 +81,17 @@
                         <field name="costo_manutenzione" string="Costo" />
                     </tree>
                 </field>
+
+                <separator string="Schede di manutenzione" />
+                <field name="request_operation_ids">
+                    <tree>
+                        <field name="data_manutenzione" />
+                        <field name="tipo_manutenzione" string="Tipo Manutenzione" />
+                        <field name="operation_ricambi_ids" string="Ricambi/consumi"  widget="many2many_tags"/>
+                        <field name="costo_totale" string="Costo" />
+                    </tree>
+                </field>
+
             </xpath>
             <xpath expr="//notebook" position="inside">
                 <page name="tarature" string="Tarature">

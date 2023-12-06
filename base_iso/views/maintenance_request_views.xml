@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_maintenance_request_form_inherit_iso" model="ir.ui.view">
+        <field name="name">view_maintenance_request_form_inherit_iso</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="priority">18</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='request_date']" position="before">
+                <field name="internal_reference" string="Cod. Interno" />
+                <field name="equipment_assign_to" widget="radio"/>
+                <field name="location" string="Luogo di utilizzo" />
+                <field name="workcenter_id" string="Centro di lavoro" />
+
+            </xpath>
+            <xpath expr="//sheet" postion="inside">
+                <notebook>
+                    <page string="Storico Manutenzioni" name="maintenance_history">
+                        <field name="last_request_ids">
+                            <tree>
+                                <field name="schedule_date" string="Data" />
+                                <field name="name" string="Descrizione" />
+                                <field name="maintenance_type" string="Tipo Manutenzione" />
+                                <field name="costo_manutenzione" string="Costo" />
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Manutenzione" name="maintenance_info">
+                        <field name="operation_ids">
+                            <tree>
+                                <field name="data_manutenzione"   />
+                                <field name="tipo_manutenzione" />
+                                <field name="luogo_manutenzione" />
+                                <field name="addetti_interni_ids" string="addetti interni" widget="many2many_tags"/>
+                                <field name="ore_manodopera" string="Ore manodopera"  />
+                                <field name="addetti_esterni" string="Addetti Esterni" widget="many2many_tags"/>
+                                <field name="costo_manodopera"  />
+                                <field name="descrizione_manutenzione" />
+                                <field name="operation_ricambi_ids" string="Ricambi/consumi"  widget="many2many_tags"/>
+                                <field name="costo_totale"  />
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <field name="data_manutenzione"   />
+                                        <field name="tipo_manutenzione" />
+                                        <field name="luogo_manutenzione" />
+                                        <field name="addetti_interni_ids" string="addetti interni" widget="many2many_tags"/>
+                                        <field name="ore_manodopera" string="Ore manodopera"  />
+                                        <field name="addetti_esterni" string="Addetti Esterni" widget="many2many_tags"/>
+                                        <field name="costo_manodopera"  />
+                                        <field name="descrizione_manutenzione" />
+                                        <field name="operation_ricambi_ids" string="Ricambi/consumi"  widget="many2many_tags"/>
+                                        <field name="documentazione_ids" string="Documentazione">
+                                            <tree editable="bottom">
+                                                <field name="date" string="Data" />
+                                                <field name="description" string="Descrizione"/>
+                                                <field name="attachment_name" invisible="1"/>
+                                                <field name="attachment" filename="attachament_name" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                            </tree>
+                                        </field>
+                                        <field name="costo_totale"  />
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                    <page string="Esito" name="maintenance_result">
+                        <group>
+                            <field name="costo_manutenzione" />
+                            <field name="validatore_interno" string="Validatore"/>
+                            <field name="prossima_manutenzione"  />
+                            <field name="data_prossima_manutenzione" />
+                            <field name="note_finali" />
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

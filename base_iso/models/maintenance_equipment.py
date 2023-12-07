@@ -1,15 +1,5 @@
 
 from odoo import api, models, fields
-class MaintenanceEquipmentDoc(models.Model):
-
-    _name = 'maintenance.equipment.doc'
-
-    date = fields.Date()
-    description = fields.Text()
-    attachment = fields.Binary('Document', copy=False, attachment=True)
-    attachment_name = fields.Char()
-    equipment_id = fields.Many2one('maintenance.equipment')
-    request_operation_id = fields.Many2one('maintenance.request.operation')
 
 
 class MaintenanceEquipmentTaratura(models.Model):
@@ -43,7 +33,7 @@ class MaintenanceEquipment(models.Model):
     macchinario_id = fields.Many2one('maintenance.equipment')
 
     # campi descrizione
-    documentazione_ids = fields.One2many('maintenance.equipment.doc', 'equipment_id')
+    documentazione_ids = fields.One2many('evidenza.documentale', 'equipment_id')
     note_attrezzatura = fields.Html()
 
     # campi informazioni prodotto

@@ -22,7 +22,9 @@
         'views/employee_scheda_valutazione_views.xml',
         'views/funzione_aziendale_views.xml',
         'views/maintenance_equipment_views.xml',
-        'views/maintenance_request_views.xml'
+        'views/maintenance_request_views.xml',
+        'views/processo_iso_views.xml',
+        'views/processo_audit_views.xml'
     ],
     "images": ['static/description/icon.png'],
     "application": True

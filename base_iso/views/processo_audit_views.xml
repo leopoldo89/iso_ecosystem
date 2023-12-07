@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_processo_audit_form" model="ir.ui.view">
+        <field name="name">view_processo_audit_form</field>
+        <field name="model">processo.audit</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group >
+                            <field name="name" string="Nome Audit" />
+                            <field name="processo_id" string="processo"/>
+                            <field name="data_audit"  />
+                            <field name="tipo_audit" />
+                            <field name="data_audit_precedente" />
+                            <field name="auditor_interno_id" />
+                            <field name="auditor_esterno_id" />
+                            <field name="campo_applicazione" />
+                        </group>
+                        <group>
+                            <field name="valutazione_finale_indicatori" />
+                            <field name="note_finali" />
+                            <field name="validatore_finale" />
+                            <field name="validazione" />
+                            <field name="data_prossimo_audit" />
+                        </group>
+
+                    </group>
+
+                    <notebook>
+
+                        <page string="RNC" name="rnc">
+                            <field name="non_conformita_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="identificativo" readonly="1" optional="show"/>
+                                    <field name="processo_id" invisible="1"/>
+                                    <field name="nc_data" string="NC Del"/>
+                                    <field name="nc_tipologia" strin="Tipo di NC" optional="show"/>
+                                    <field name="description" strin="Cosa è Successo?" />
+                                    <field name="priority" widget="priority"/>
+                                    <field name="nc_data_risoluzione" string="Risolta il" />
+                                    <field name="nc_risolta_da" string="Risolta Da" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Rischi" name="rischi">
+                            <field name="rischi_ids">
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                    <field name="data" />
+                                    <field name="rischio_identificato" />
+                                    <field name="validazione_finale" />
+                                    <field name="validatore_interno" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Opportunità" name="opportunita">
+                            <field name="opportunita_ids">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="data" />
+                                    <field name="opportunita_identificata" />
+                                    <field name="validazione_finale" />
+                                    <field name="validatore_interno" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Azioni Correttive" name="azioni_correttive">
+                            <field name="azioni_correttive_ids">
+                                <tree>
+                                    <field name="data_apertura" />
+                                    <field name="descrizione" string="Descrizione/Motivazioni"/>
+                                    <field name="anno" optional="show"/>
+                                    <field name="importanza" optional="show"/>
+                                    <field name="riscontri" optional="show"/>
+                                    <field name="commento_finale" />
+                                    <field name="chiusura_ac" string="Chiusura della AC" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Attività dell'audit" name="attivita_audit">
+                            <separator string="Requisiti" />
+                            <field name="requisiti_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="Nome" />
+                                    <field name="voto"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field>
+
+                            <separator string="Indicatori" />
+                            <field name="indicatori_ids">
+                                <tree editable="bottom">
+                                    <field name="indicatore_id" string="Indicatore" />
+                                    <field name="previsto"/>
+                                    <field name="valore_riscontrato"/>
+                                    <field name="note" />
+                                </tree>
+                            </field>
+
+                            <separator string="Evidenze documentali" />
+                            <field name="documentazione_ids">
+                                <tree editable="bottom">
+                                    <field name="date" string="Data" />
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="attachment_name" invisible="1"/>
+                                    <field name="attachment" filename="attachament_name" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Esito e Validazione" name="esito_validazione">
+                            <separator string="Miglioramente da Attuare" />
+                            <field name="miglioramenti" />
+
+                            <separator string="FA da informare" />
+                            <field name="fa_da_informare_ids">
+                                <tree editable="bottom">
+                                    <field name="employee_id" string="Collaboratore" />
+                                    <field name="argomento" />
+                                    <field name="entro_il" />
+                                    <field name="efficacia" />
+                                    <field name="tutor_interno" />
+                                    <field name="fatta_il" />
+                                </tree>
+                            </field>
+
+                            <separator string="Azioni Correttive da aprire"/>
+                            <field name="ac_da_creare_ids">
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                    <field name="descrizione"/>
+                                    <field name="anno" />
+                                    <field name="data_apertura" />
+                                    <field name="importanza" />
+                                    <field name="riscontri" />
+                                    <field name="commento_finale" />
+                                    <field name="chiusura_ac" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_processo_audit_tree" model="ir.ui.view">
+        <field name="name">view_processo_audit_tree</field>
+        <field name="model">processo.audit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Nome Audit" />
+                <field name="processo_id" string="Sottoprocesso di" />
+                <field name="data_audit" />
+                <field name="tipo_audit"  />
+                <field name="valutazione_finale_indicatori"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--  VISTA DI RICERCA   -->
+    <record id="view_processo_audit_search" model="ir.ui.view">
+        <field name="name">>view_processo_audit_search</field>
+        <field name="model">processo.audit</field>
+        <field name="arch" type="xml">
+            <search string="Ricerca">
+
+            </search>
+        </field>
+    </record>
+
+
+    <!--  ACTION PROCESSO ISO-->
+    <record id="action_processo_audit" model="ir.actions.act_window">
+        <field name="name">Audit di processo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">processo.audit</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="base_iso_partner_processo_audit_menu" name="Audit dei Processi" sequence="15"
+              parent="base_iso.base_iso_processi_menu_section" action="action_processo_audit"/>
+
+
+</odoo>

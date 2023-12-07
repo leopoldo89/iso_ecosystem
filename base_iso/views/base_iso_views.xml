@@ -3,5 +3,6 @@
 
     <menuitem id="base_iso_menu_root" name="ISO" sequence="5" web_icon="base_iso,static/description/icon.png"/>
     <menuitem id="base_iso_menu_qualifiche" name="Qualifiche" sequence="5" parent="base_iso_menu_root"/>
+    <menuitem id="base_iso_menu_controllo_qualita" name="Controllo Qualità" sequence="10" parent="base_iso_menu_root"/>
 
 </odoo>

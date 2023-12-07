@@ -18,7 +18,7 @@ class MaintenanceRequestOperation(models.Model):
     descrizione_manutenzione = fields.Text()
     operation_ricambi_ids = fields.One2many('operation.ricambio', 'operation_id')
     costo_totale = fields.Float(compute="compute_costo_totale")
-    documentazione_ids = fields.One2many('maintenance.equipment.doc', 'request_operation_id')
+    documentazione_ids = fields.One2many('evidenza.documentale', 'request_operation_id')
 
     # campi macchina utensile
     # todo valutare di renderlo un campo many2one con dei nostri valori preimpostati

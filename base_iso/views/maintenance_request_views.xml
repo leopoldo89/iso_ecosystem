@@ -50,7 +50,7 @@
                                         <field name="addetti_esterni" string="Addetti Esterni" widget="many2many_tags"/>
                                         <field name="costo_manodopera"  />
                                         <field name="descrizione_manutenzione" />
-                                        <field name="operation_ricambi_ids" string="Ricambi/consumi"  widget="many2many_tags"/>
+                                        <field name="operation_ricambi_ids" string="Ricambi/consumi" />
                                         <field name="documentazione_ids" string="Documentazione">
                                             <tree editable="bottom">
                                                 <field name="date" string="Data" />
@@ -67,7 +67,7 @@
                     </page>
                     <page string="Esito" name="maintenance_result">
                         <group>
-                            <field name="costo_manutenzione" />
+                            <field name="costo_manutenzione" string="Costo Totale Manutenzioni"/>
                             <field name="validatore_interno" string="Validatore"/>
                             <field name="prossima_manutenzione"  />
                             <field name="data_prossima_manutenzione" />

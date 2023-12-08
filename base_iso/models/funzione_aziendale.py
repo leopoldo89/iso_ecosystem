@@ -10,7 +10,6 @@ class HrJobQualifica(models.Model):
     job_id = fields.Many2one('hr.job')
 
 
-
 class HrJobInherit(models.Model):
 
     _inherit = "hr.job"
@@ -22,3 +21,18 @@ class HrJobInherit(models.Model):
 
     qualifiche_ids = fields.One2many('hr.job.qualifica', 'job_id')
     skill_ids = fields.Many2many('hr.employee.skill', 'job_id')
+
+
+class HrJobEmployee(models.Model):
+
+    _inherit = "hr.employee"
+
+    def name_get(self):
+        result = []
+        for employee in self:
+            name = employee.name
+            if employee.job_id:
+                name += ' - ' + employee.job_id.name
+            result.append((employee.id, name))
+        return result
+

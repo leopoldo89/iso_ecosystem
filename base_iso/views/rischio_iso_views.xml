@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rischio_iso_form" model="ir.ui.view">
+        <field name="name">view_rischio_iso_form</field>
+        <field name="model">rischio.iso</field>
+        <field name="inherit_id" ref="base_iso.view_risk_opportunity_base_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='data']" position="before">
+                <field name="rischio_identificato" />
+            </xpath>
+            <xpath expr="//field[@name='air_area_attivita']" position="before">
+                <field name="processo_id" />
+            </xpath>
+            <xpath expr="//page[@name='obiettivi']" position="before">
+                <page string="Frequenza, Danno, Urgenza" name="frequenza">
+
+                    <separator string="Attuale Frequenza" />
+                    <field name="fdu_attuale_frequenza" nolabel="1" />
+
+                    <separator string="Danno Potenziale" />
+                    <field name="fdu_danno_potenziale" nolabel="1" />
+
+                    <separator string="Azioni mitiganti" />
+                    <field name="fdu_azioni_mitiganti" nolabel="1" />
+
+                    <separator string="Azioni risolutive" />
+                    <field name="fdu_azioni_risolutive" nolabel="1" />
+
+                    <separator string="Identificazione della priorità" />
+                    <field name="fdu_identificatione_priorita" nolabel="1" />
+
+                    <separator string="Note" />
+                    <field name="fdu_note_frequenza" nolabel="1" />
+                </page>
+            </xpath>
+            <xpath expr="//sheet" position="after">
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_rischio_iso_tree" model="ir.ui.view">
+        <field name="name">view_rischio_iso_tree</field>
+        <field name="model">rischio.iso</field>
+        <field name="inherit_id" ref="base_iso.view_risk_opportunity_base_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='data']" position="before">
+                <field name="processo_id" />
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--  VISTA DI RICERCA   -->
+    <record id="view_rischio_iso_search" model="ir.ui.view">
+        <field name="name">>view_rischio_iso_search</field>
+        <field name="model">rischio.iso</field>
+        <field name="arch" type="xml">
+            <search string="Ricerca">
+
+            </search>
+        </field>
+    </record>
+
+
+    <!--  ACTION RISCHIO ISO-->
+    <record id="action_rischio_iso" model="ir.actions.act_window">
+        <field name="name">Rischio</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rischio.iso</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'sequence': 1, 'view_id': ref('base_iso.view_rischio_iso_tree')}),
+            (0, 0, {'view_mode': 'form', 'sequence': 2, 'view_id': ref('base_iso.view_rischio_iso_form')})]"/>
+    </record>
+
+    <menuitem id="base_iso_rischi_menu_section" name="Rischi" sequence="5"
+              parent="base_iso.base_iso_menu_alta_direzione"/>
+    <menuitem id="base_iso_rischi_iso_menu" name="Anagrafica" sequence="1"
+              parent="base_iso.base_iso_rischi_menu_section" action="action_rischio_iso"/>
+
+
+</odoo>

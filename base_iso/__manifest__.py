@@ -24,7 +24,10 @@
         'views/maintenance_equipment_views.xml',
         'views/maintenance_request_views.xml',
         'views/processo_iso_views.xml',
-        'views/processo_audit_views.xml'
+        'views/processo_audit_views.xml',
+        'views/risk_opportunity_base_views.xml',
+        'views/rischio_iso_views.xml',
+        'views/opportunita_iso_views.xml',
     ],
     "images": ['static/description/icon.png'],
     "application": True

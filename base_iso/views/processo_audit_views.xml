@@ -11,6 +11,8 @@
                             <field name="name" string="Nome Audit" />
                             <field name="processo_id" string="processo"/>
                             <field name="data_audit"  />
+                            <field name="inizio_periodo" />
+                            <field name="fine_periodo" />
                             <field name="tipo_audit" />
                             <field name="data_audit_precedente" />
                             <field name="auditor_interno_id" />

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_risk_opportunity_base_form" model="ir.ui.view">
+        <field name="name">view_risk_opportunity_base_form</field>
+        <field name="model">risk.opportunity.base</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group >
+                        <group string="Anagrafica">
+                            <field name="name" />
+                            <field name="data"/>
+                            <field name="tipo" />
+                            <field name="gruppo_anagrafica_ids" context="{'default_tipologia_gruppo':'ro_anagrafica'}">
+                                <tree editable="bottom">
+                                    <field name="employee_id" string="Collaboratore" />
+                                    <field name="incarico" string="Incarico nel gruppo" />
+                                    <field name="tipologia_gruppo" invisible="1" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Analisi ed identificazione del rischio">
+                            <field name="air_area_attivita" string="Area di Attività" />
+                            <field name="air_situazione_attuale" string="Situazione attuale" />
+                            <field name="air_potenzionale_situazione_futura" string="Potenziale situazione futura"/>
+                        </group>
+
+                    </group>
+
+                    <notebook>
+                        <page string="Obiettivi da perseguire" name="obiettivi">
+                            <separator string="Descrizione" />
+                            <field name="op_descrizione" nolabel="1" />
+
+                            <separator string="Quantificazione" />
+                            <field name="op_quantificazione" nolabel="1" />
+
+                            <separator string="Evidenze Documentali" />
+                            <field name="op_documentazione_ids" nolabel="1" context="{'default_sezione_modello':'ro_obiettivi'}">
+                                <tree editable="bottom">
+                                    <field name="date" string="Data" />
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="attachment_name" invisible="1"/>
+                                    <field name="attachment" filename="attachament_name" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="sezione_modello" invisible="1" />
+                                </tree>
+                            </field>
+
+                            <separator string="Tempistica Prevista" />
+                            <field name="op_tempistica_prevista" nolabel="1"/>
+
+                            <separator string="Responsabile" />
+                            <field name="op_responsabile_id" nolabel="1"/>
+
+                            <separator string="Gruppo di lavoro" />
+                            <field name="op_gruppo_ids" nolabel="1" context="{'default_tipologia_gruppo':'ro_obiettivi'}">
+                                <tree editable="bottom">
+                                    <field name="employee_id" string="Collaboratore" />
+                                    <field name="incarico" string="Incarico nel gruppo" />
+                                    <field name="tipologia_gruppo" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Azioni da intraprendere" name="azioni_intreprendere">
+                            <group>
+                                <group>
+                                    <field name="ai_attivita_azioni" string="Attività"/>
+                                    <field name="ai_tempistica_azioni" string="tempistica"/>
+                                    <field name="ai_supporti_azioni" string="Supporti"/>
+                                </group>
+                                <group>
+                                    <field name="ai_responsabile_id" string="responsabile" />
+                                    <field name="ai_gruppo_ids" string="Gruppo di lavoro" context="{'default_tipologia_gruppo':'ro_azioni'}" >
+                                        <tree editable="bottom">
+                                            <field name="employee_id" string="Collaboratore" />
+                                            <field name="incarico" string="Incarico nel gruppo" />
+                                            <field name="tipologia_gruppo" invisible="1" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                            <separator string="Note" />
+                            <field name="ai_note" nolabel="1" />
+                        </page>
+
+                        <page string="Risorse Necessarie" name="risorese_necessarie">
+                            <group>
+                                <group>
+                                    <field name="rn_descrizione" string="Descrizione delle Risorse"/>
+                                    <field name="rn_quantificazione_budget" string="Quantificazione Budget"/>
+                                    <field name="rn_supporti_esterni" string="Supporti"/>
+                                </group>
+                                <group>
+                                    <field name="rn_responsabile_id" string="responsabile" />
+                                    <field name="rn_gruppo_ids" string="Gruppo di lavoro" context="{'default_tipologia_gruppo':'ro_risorse'}" >
+                                        <tree editable="bottom">
+                                            <field name="employee_id" string="Collaboratore" />
+                                            <field name="incarico" string="Incarico nel gruppo" />
+                                            <field name="tipologia_gruppo" invisible="1" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                            <separator string="Note" />
+                            <field name="rn_note" nolabel="1" />
+                        </page>
+
+                        <page string="Piano di attuazione" name="piano_attuazione">
+                            <group>
+                                <group>
+                                    <field name="pa_attivita_da_svolgere" string="Attività da svolgere"/>
+                                    <field name="pa_data_dal" string="Dal:"/>
+                                    <field name="pa_data_al" string="Al:"/>
+                                    <field name="pa_obiettivi" string="Obiettivi da raggiungere"/>
+                                </group>
+                                <group>
+                                    <field name="pa_responsabile_id" string="responsabile" />
+                                    <field name="pa_gruppo_ids" string="Gruppo di lavoro" context="{'default_tipologia_gruppo':'ro_piano'}" >
+                                        <tree editable="bottom">
+                                            <field name="employee_id" string="Collaboratore" />
+                                            <field name="incarico" string="Incarico nel gruppo" />
+                                            <field name="tipologia_gruppo" invisible="1" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                            <separator string="Note" />
+                            <field name="pa_note" nolabel="1" />
+                        </page>
+
+                        <page string="Evidenza ed Efficacia" name="evidenza_efficacia">
+                            <group>
+                                <group>
+                                    <field name="ee_attivita_svolte" string="Attività svolta"/>
+                                    <field name="ee_start_at" string="Start"/>
+                                </group>
+                                <group>
+                                    <field name="ee_responsabile_id" string="Responsabile" />
+                                    <field name="ee_gruppo_ids" string="Gruppo di lavoro" context="{'default_tipologia_gruppo':'ro_efficacia'}" >
+                                        <tree editable="bottom">
+                                            <field name="employee_id" string="Collaboratore" />
+                                            <field name="incarico" string="Incarico nel gruppo" />
+                                            <field name="tipologia_gruppo" invisible="1" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                            <separator string="Evidenze Documentali" />
+                            <field name="ee_documentazione_ids" nolabel="1" context="{'default_sezione_modello':'ro_efficacia'}">
+                                <tree editable="bottom">
+                                    <field name="date" string="Data" />
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="attachment_name" invisible="1"/>
+                                    <field name="attachment" filename="attachament_name" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="sezione_modello" invisible="1" />
+                                </tree>
+                            </field>
+
+                            <separator string="Validazione" />
+                            <group>
+                                <group>
+                                    <field name="validazione_finale" string="Validazione Finale"/>
+                                    <field name="validatore_interno" string="Validatore" />
+                                    <field name="ee_end_at" string="Fine il" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_risk_opportunity_base_tree" model="ir.ui.view">
+        <field name="name">view_risk_opportunity_base_tree</field>
+        <field name="model">risk.opportunity.base</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"  />
+                <field name="data" string="Data" />
+                <field name="tipo" />
+                <field name="anno" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

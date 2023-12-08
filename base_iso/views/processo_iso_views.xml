@@ -17,19 +17,19 @@
                     </group>
                     <group>
                         <group string="Input" name="input">
-                            <field name="input_output_ids">
-                                <tree editable="bottom" domain="[('is_input', '=', True)]"  context="{'default_is_input': True}">
+                            <field name="input_ids"  context="{'default_is_input': True}">
+                                <tree editable="bottom" >
                                     <field name="descrizione"  />
-                                    <field name="rilevanza" widget="priority" />
+                                    <field name="rilevanza" />
                                     <field name="is_input" invisible="1" />
                                 </tree>
                             </field>
                         </group>
                         <group string="Output" name="output">
-                            <field name="input_output_ids">
-                                <tree editable="bottom" domain="[('is_input', '=', False)]"  context="{'default_is_input': False}">
+                            <field name="output_ids"  context="{'default_is_input': False}">
+                                <tree editable="bottom">
                                     <field name="descrizione"  />
-                                    <field name="rilevanza" widget="priority" />
+                                    <field name="rilevanza" />
                                     <field name="is_input" invisible="1" />
                                 </tree>
                             </field>

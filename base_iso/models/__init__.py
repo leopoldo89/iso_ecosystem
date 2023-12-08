@@ -8,9 +8,11 @@ from . import funzione_aziendale
 from . import maintenance_equipment
 from . import maintenance_request
 from . import maintenance_request_operation
+from . import risk_opportunity_base
 from . import processo_iso
 from . import azione_correttiva
 from . import rischio_iso
 from . import opportunita_iso
 from . import processo_audit
 from . import evidenze_documentali
+from . import gruppo_lavoro

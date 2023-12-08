@@ -34,11 +34,11 @@
                                 </group>
                             </group>
                             <group>
-                                <group string="esito">
-                                    <field name="f_esito" nolabel="1" />
+                                <group>
+                                    <field name="f_esito"  string="Esito"/>
                                 </group>
-                                <group string="Note">
-                                    <field name="f_note" nolabel="1" />
+                                <group>
+                                    <field name="f_note" string="Note"/>
                                 </group>
                             </group>
                         </page>
@@ -55,15 +55,15 @@
                                 </group>
                             </group>
                             <group>
-                                <group string="Risultato">
-                                    <field name="v_risultato" nolabel="1" />
+                                <group >
+                                    <field name="v_risultato" string="Risultato"/>
                                 </group>
-                                <group string="Note">
-                                    <field name="v_efficacia" nolabel="1" />
+                                <group >
+                                    <field name="v_efficacia" string="Efficacia"/>
                                 </group>
                             </group>
-                            <group string="Note finali">
-                                <field name="v_note_finali" nolabel="1" />
+                            <group >
+                                <field name="v_note_finali" string="Note finali"/>
                             </group>
                         </page>
                     </notebook>

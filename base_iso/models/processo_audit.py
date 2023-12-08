@@ -46,6 +46,8 @@ class ProcessoAudit(models.Model):
     name = fields.Char()
 
     processo_id = fields.Many2one('processo.iso')  # relazione a processo
+    inizio_periodo = fields.Date()
+    fine_periodo = fields.Date()
     data_audit = fields.Date()
     tipo_audit = fields.Selection([('programmato', 'Programmato'), ('straordinanio', 'Straordinario')])
     audit_precedente_id = fields.Many2one('processo.audit')

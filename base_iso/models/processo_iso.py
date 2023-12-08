@@ -37,7 +37,8 @@ class ProcessoIso(models.Model):
     responsible_id = fields.Many2one('hr.employee')
 
     # campi input/output
-    input_output_ids = fields.One2many('processo.iso.input.output', 'processo_id')
+    input_ids = fields.One2many('processo.iso.input.output', 'processo_id', domain=[('is_input', '=', True)])
+    output_ids = fields.One2many('processo.iso.input.output', 'processo_id', domain=[('is_input', '=', False)])
 
     # campi indicatori
     indicatori_ids = fields.One2many('processo.iso.indicatore', 'processo_id')

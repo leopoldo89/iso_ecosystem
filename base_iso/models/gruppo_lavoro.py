@@ -14,10 +14,13 @@ class GruppoLavoroIso(models.Model):
     # serve per mettere un domain ai campi o2m
     tipologia_gruppo = fields.Selection(selection=[('ro_anagrafica', 'ro_anagrafica'),  ('ro_obiettivi', 'ro_obiettivi'),
                                                    ('ro_azioni', 'ro_azioni'), ('ro_risorse', 'ro_risorse'), ('ro_piano', 'ro_piano'),
-                                                   ('ro_efficacia', 'ro_efficacia')])
+                                                   ('ro_efficacia', 'ro_efficacia'), ('ac_anagrafica', 'ac_anagrafica'),
+                                                   ('ac_azioni', ('ac_azioni'))])
 
     # campi relazionali
     risk_opp_id = fields.Many2one('risk.opportunity.base')
+    quality_alert_id = fields.Many2one('quality.alert')
+    azione_correttiva_id = fields.Many2one('azione.correttiva')
 
     @api.onchange('partner_id')
     def onchange_partner_id(self):

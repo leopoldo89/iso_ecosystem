@@ -64,13 +64,6 @@ class QualificationProduzioneAnnuale(models.Model):
     descrizione = fields.Text()
     qualification_id = fields.Many2one('res.partner.qualification')
 
-class RapportoNonconformita(models.Model):
-
-    _name = 'rapporto.nonconformita'
-    #todo eliminare
-
-
-
 
 class QualificaCliente(models.Model):
     _name = 'res.partner.qualification'

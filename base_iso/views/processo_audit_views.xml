@@ -78,7 +78,7 @@
                                     <field name="anno" optional="show"/>
                                     <field name="importanza" optional="show"/>
                                     <field name="riscontri" optional="show"/>
-                                    <field name="commento_finale" />
+                                    <field name="esito_finale" />
                                     <field name="chiusura_ac" string="Chiusura della AC" />
                                 </tree>
                             </field>
@@ -141,7 +141,7 @@
                                     <field name="data_apertura" />
                                     <field name="importanza" />
                                     <field name="riscontri" />
-                                    <field name="commento_finale" />
+                                    <field name="esito_finale" />
                                     <field name="chiusura_ac" />
                                 </tree>
                             </field>

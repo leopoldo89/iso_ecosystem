@@ -50,29 +50,31 @@
                     <notebook>
 
                         <page string="RNC/Documentazioni" name="rnc_documentazioni">
-                            <group>
-                                <field name="non_conformita_ids">
-                                    <tree >
-                                        <field name="name" string="identificativo" readonly="1" optional="show"/>
-                                        <field name="richiesta_esterna_id" />
-                                        <field name="richiesta_interna_id" />
-                                        <field name="nc_data" string="NC Del"/>
-                                        <field name="nc_tipologia" strin="Tipo di NC" optional="show"/>
-                                        <field name="cosa_successo" strin="Cosa è Successo?" />
-                                        <field name="urgenza"/>
-                                    </tree>
-                                </field>
-                                <separator />
-                                <field name="documentazione_rnc_ids" context="{'default_sezione_modello':'ac_documentazione'}">
-                                    <tree editable="bottom">
-                                        <field name="date" string="Data" />
-                                        <field name="description" string="Descrizione"/>
-                                        <field name="attachment_name" invisible="1"/>
-                                        <field name="attachment" filename="attachament_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
-                                        <field name="sezione_modello" invisible="1" />
-                                    </tree>
-                                </field>
-                            </group>
+
+                            <separator string="Elenco delle NC"/>
+                            <field name="non_conformita_ids">
+                                <tree >
+                                    <field name="name" string="identificativo" readonly="1" optional="show"/>
+                                    <field name="richiesta_esterna_id" />
+                                    <field name="richiesta_interna_id" />
+                                    <field name="nc_data" string="NC Del"/>
+                                    <field name="nc_tipologia" strin="Tipo di NC" optional="show"/>
+                                    <field name="cosa_successo" strin="Cosa è Successo?" />
+                                    <field name="urgenza"/>
+                                </tree>
+                            </field>
+
+                            <separator string="Documentazione di supporto"/>
+                            <field name="documentazione_rnc_ids" context="{'default_sezione_modello':'ac_documentazione'}">
+                                <tree editable="bottom">
+                                    <field name="date" string="Data" />
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="attachment_name" invisible="1"/>
+                                    <field name="attachment" filename="attachament_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="sezione_modello" invisible="1" />
+                                </tree>
+                            </field>
+
                         </page>
 
                         <page string="Descrizione Eventi" name="descrizione_eventi">

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_azione_correttiva_form" model="ir.ui.view">
+        <field name="name">view_azione_correttiva_form</field>
+        <field name="model">azione.correttiva</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <div class="oe_title">
+                        <h1>
+                           <field name="name" />
+                        </h1>
+                    </div>
+
+                    <group>
+
+                        <group>
+                            <field name="richiesta_employee_id" string="Richiesta interna"/>
+                            <field name="richiesta_il" />
+                            <field name="descrizione" />
+                        </group>
+
+                        <group>
+                            <field name="rdq_gruppo_ids" string="Gruppo di lavoro" context="{'default_tipologia_gruppo':'ac_anagrafica'}">
+                                <tree editable="bottom">
+                                    <field name="employee_id" string="Collaboratore" />
+                                    <field name="partner_id" string="Consulente Esterno" />
+                                    <field name="incarico" string="Incarico nel gruppo" />
+                                    <field name="tipologia_gruppo" invisible="1" />
+                                </tree>
+                            </field>
+                            <field name="apertura_ac" string="OK apertura dell'AC?" />
+                            <field name="data_apertura"/>
+                            <field name="importanza" string="Importanza/Urgenza"/>
+                            <field name="processi_coinvolti_ids" >
+                                <tree editable="bottom">
+                                    <field name="processo_id" />
+                                    <field name="tipo" />
+                                </tree>
+                            </field>
+                            <field name="ac_data_risoluzione" string="Risolta il"/>
+                            <field name="ac_risolta_da" string="Risolta da"/>
+                            <field name="validata_da" string="Validata da"/>
+                            <field name="chiusura_ac" string="OK chiusura AC?" />
+                        </group>
+
+                    </group>
+
+                    <notebook>
+
+                        <page string="RNC/Documentazioni" name="rnc_documentazioni">
+                            <group>
+                                <field name="non_conformita_ids">
+                                    <tree >
+                                        <field name="name" string="identificativo" readonly="1" optional="show"/>
+                                        <field name="richiesta_esterna_id" />
+                                        <field name="richiesta_interna_id" />
+                                        <field name="nc_data" string="NC Del"/>
+                                        <field name="nc_tipologia" strin="Tipo di NC" optional="show"/>
+                                        <field name="cosa_successo" strin="Cosa è Successo?" />
+                                        <field name="urgenza"/>
+                                    </tree>
+                                </field>
+                                <separator />
+                                <field name="documentazione_rnc_ids" context="{'default_sezione_modello':'ac_documentazione'}">
+                                    <tree editable="bottom">
+                                        <field name="date" string="Data" />
+                                        <field name="description" string="Descrizione"/>
+                                        <field name="attachment_name" invisible="1"/>
+                                        <field name="attachment" filename="attachament_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                        <field name="sezione_modello" invisible="1" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+
+                        <page string="Descrizione Eventi" name="descrizione_eventi">
+
+                            <separator string="Descrizione dei fatti" />
+                            <field name="descrizione_fatti" />
+
+                            <separator string="Valutazioni iniziali" />
+                            <field name="valutazioni_iniziali" />
+                        </page>
+
+                        <page string="Azioni Correttive" name="azioni_correttive">
+
+                            <separator string="Gruppo di Lavoro" />
+                            <field name="azioni_gruppo_ids" string="Gruppo di lavoro" context="{'default_tipologia_gruppo':'ac_azioni'}">
+                                <tree editable="bottom">
+                                    <field name="employee_id" string="Collaboratore" />
+                                    <field name="partner_id" string="Consulente Esterno" />
+                                    <field name="incarico" string="Incarico nel gruppo" />
+                                    <field name="tipologia_gruppo" invisible="1" />
+                                </tree>
+                            </field>
+
+                            <separator string="Proposte" />
+                            <field name="proposte_ids" >
+                                <tree editable="bottom">
+                                    <field name="name" string="Nome"/>
+                                    <field name="descrizione" />
+                                    <field name="employee_id" string="Dipendente"/>
+                                    <field name="data_fine" />
+                                </tree>
+                            </field>
+
+                            <separator string="Soluzioni" />
+                            <field name="soluzione_ids" >
+                                <tree editable="bottom">
+                                    <field name="name" string="Nome"/>
+                                    <field name="data" />
+                                    <field name="attivita_da_svolgere" />
+                                    <field name="incaricato_employee_id" string="Collaboratore incarica"/>
+                                    <field name="entro_il" />
+                                    <field name="risorse" />
+                                    <field name="budget" />
+                                </tree>
+                            </field>
+
+                        </page>
+
+                        <page string="Evidenze-Soluzioni-Esiti-Validazione" name="evidenze_esiti">
+
+                            <separator string="Esito/descrizione finale" />
+                            <field name="esito_finale" />
+
+                            <separator string="Allegati di Supporto" />
+                            <field name="documentazione_supporto_ids" context="{'default_sezione_modello':'ac_supporto'}">
+                                <tree editable="bottom">
+                                    <field name="date" string="Data" />
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="attachment_name" invisible="1"/>
+                                    <field name="attachment" filename="attachament_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="sezione_modello" invisible="1" />
+                                </tree>
+                            </field>
+
+                            <separator string="Consuntivo Costi" />
+                            <field name="consuntivo_costi" />
+
+                            <separator string="Documentazione Chiusura" />
+                            <field name="documentazione_chiusura_ids" context="{'default_sezione_modello':'ac_chiusura'}">
+                                <tree editable="bottom">
+                                    <field name="date" string="Data" />
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="attachment_name" invisible="1"/>
+                                    <field name="attachment" filename="attachament_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="sezione_modello" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_azione_correttiva_tree" model="ir.ui.view">
+        <field name="name">view_azione_correttiva_tree</field>
+        <field name="model">azione.correttiva</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+
+    <!--  ACTION CORRETTIVA ISO-->
+    <record id="action_azione_correttiva" model="ir.actions.act_window">
+        <field name="name">Azione Correttiva</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">azione.correttiva</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="base_iso_azioni_correttive_menu_section" name="Azioni Correttiva" sequence="25"
+              parent="base_iso.base_iso_menu_controllo_qualita"/>
+    <menuitem id="base_iso_azioni_correttive_iso_menu" name="Anagrafica" sequence="1"
+              parent="base_iso.base_iso_azioni_correttive_menu_section" action="action_azione_correttiva"/>
+
+
+</odoo>

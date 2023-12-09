@@ -30,7 +30,7 @@
                                 <group>
                                     <field name="f_verificare_entro_il" string="Verificata entro il" />
                                     <field name="f_attachment_name" invisible="1"/>
-                                    <field name="f_attachment" filename="attachament_name" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="f_attachment" filename="attachament_name" widget="binary" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
                                 </group>
                             </group>
                             <group>

@@ -110,7 +110,7 @@
                                     <field name="date" string="Data" />
                                     <field name="description" string="Descrizione"/>
                                     <field name="attachment_name" invisible="1"/>
-                                    <field name="attachment" filename="attachament_name" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="attachment" filename="attachament_name" widget="binary" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
                                     <field name="note"/>
                                 </tree>
                             </field>

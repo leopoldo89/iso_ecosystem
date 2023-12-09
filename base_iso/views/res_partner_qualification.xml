@@ -74,7 +74,7 @@
                                     <field name="validita" string="Valido fino a"/>
                                     <field name="ente_certificazione" string="Ente di Certificazione" />
                                     <field name="attachment_name" invisible="1"/>
-                                    <field name="attachment" filename="attachament_name" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="attachment" filename="attachament_name" widget="binary" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
                                 </tree>
                             </field>
                         </page>

@@ -28,6 +28,8 @@
         'views/risk_opportunity_base_views.xml',
         'views/rischio_iso_views.xml',
         'views/opportunita_iso_views.xml',
+        'views/quality_alert_views.xml',
+        'views/azione_correttiva_views.xml',
     ],
     "images": ['static/description/icon.png'],
     "application": True

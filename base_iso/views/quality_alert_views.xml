@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_quality_alert_form" model="ir.ui.view">
+        <field name="name">view_quality_alert_form</field>
+        <field name="model">quality.alert</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                           <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="richiesta_interna_id" />
+                            <field name="richiesta_esterna_id" />
+                            <field name="rilevata_il" />
+                            <field name="nc_data" string="NC del"/>
+                            <field name="description" />
+                        </group>
+                        <group>
+                            <field name="apertura_rdq" string="OK apertura del RDQ?" />
+                            <field name="data_apertura"/>
+                            <field name="urgenza" string="Importanza/Urgenza"/>
+                            <field name="processi_coinvolti_ids" >
+                                <tree editable="bottom">
+                                    <field name="processo_id" />
+                                    <field name="tipo" />
+                                </tree>
+                            </field>
+                            <field name="nc_data_risoluzione" string="Risolta il"/>
+                            <field name="nc_risolta_da" string="Risolta da"/>
+                            <field name="validata_da" string="Validata da"/>
+                            <field name="chiusura_rdq" string="OK chiusura RdQ?" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descrizione" name="descrizione">
+                            <group>
+                                <field name="imputato_a" />
+                                <field name="imputato_employee_id" string="Dipendente"
+                                       attrs="{'invisible':[('imputato_a', '!=', 'dipendente')]}"/>
+                                <field name="imputato_partner_id" string="Cliente/Fornitore"
+                                       attrs="{'invisible':[('imputato_a', 'not in', ['cliente', 'fornitore'])]}"/>
+                                <field name="nc_tipologia" string="Tipo di NC" />
+                                <field name="classe" />
+                                <field name="documentazione_supporto_ids" string="Documentazione di supporto" context="{'default_sezione_modello':'rnc_descrizione'}">
+                                    <tree editable="bottom">
+                                        <field name="date" string="Data" />
+                                        <field name="description" string="Descrizione"/>
+                                        <field name="attachment_name" invisible="1"/>
+                                        <field name="attachment" filename="attachament_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                        <field name="sezione_modello" invisible="1" />
+                                    </tree>
+
+                                </field>
+                                <field name="note_descrizione" string="Note"/>
+                            </group>
+
+                        </page>
+
+                        <page string="Analisi" name="analisi">
+                            <group col='3'>
+                                <group>
+                                    <field name="cosa_successo" string="Cosa è successo?"/>
+                                </group>
+                                <group >
+                                    <field name="cause_individuate" />
+                                </group>
+                                <group >
+                                    <field name="azioni_da_intraprendere" />
+                                </group>
+                            </group>
+                            <group>
+                                <field name="entro_il" />
+                                <field name="gravita" />
+                                <field name="nc_costo" />
+                            </group>
+                        </page>
+
+                        <page string="Trattamento" name="trattamento">
+                            <group>
+                                <field name="nc_gruppo_ids" string="Gruppo di lavoro">
+                                    <tree editable="bottom">
+                                        <field name="employee_id" string="Collaboratore" />
+                                        <field name="incarico" string="Incarico nel gruppo" />
+                                    </tree>
+                                </field>
+                                <separator />
+                                <field name="azioni_correttive_ids" string="Attività svolte">
+                                    <tree>
+                                        <field name="name" />
+                                        <field name="descrizione" />
+                                        <field name="apertura_ac" string="Data inizio" />
+                                        <field name="richiesta_employee_id" string="Dipendente" />
+                                        <field name="descrizione_fatti" string="Attività svolte"/>
+                                        <field name="esito_finale" />
+                                        <field name="chiusura_ac" string="Data fine"/>
+                                    </tree>
+                                </field>
+                                <field name="esito_finale" />
+                                <field name="documentazione_chiusura_ids" context="{'default_sezione_modello':'rnc_trattamento'}">
+                                    <tree editable="bottom">
+                                        <field name="date" string="Data" />
+                                        <field name="description" string="Descrizione"/>
+                                        <field name="attachment_name" invisible="1"/>
+                                        <field name="attachment" filename="attachament_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                        <field name="sezione_modello" invisible="1" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_quality_alert_tree" model="ir.ui.view">
+        <field name="name">view_quality_alert_tree</field>
+        <field name="model">quality.alert</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="rilevata_il" />
+                <field name="nc_data" string="NC del"/>
+                <field name="urgenza" />
+                <field name="nc_tipologia" string="Tipo di NC" />
+            </tree>
+        </field>
+    </record>
+
+
+    <!--  ACTION RISCHIO ISO-->
+    <record id="action_quality_alert" model="ir.actions.act_window">
+        <field name="name">RNC</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">quality.alert</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'sequence': 1, 'view_id': ref('base_iso.view_quality_alert_tree')}),
+            (0, 0, {'view_mode': 'form', 'sequence': 2, 'view_id': ref('base_iso.view_quality_alert_form')})]"/>
+    </record>
+
+    <menuitem id="base_iso_rnc_menu_section" name="RNC" sequence="20"
+              parent="base_iso.base_iso_menu_controllo_qualita"/>
+    <menuitem id="base_iso_rnc_anagrafica_iso_menu" name="Anagrafica" sequence="1"
+              parent="base_iso.base_iso_rnc_menu_section" action="action_quality_alert"/>
+
+
+</odoo>

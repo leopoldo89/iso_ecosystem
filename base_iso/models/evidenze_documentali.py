@@ -21,6 +21,6 @@ class EvidenzaDocumentale(models.Model):
     # campo utile quando bisogna avere più tabelle O2M di evidenza documentale in uno stesso modello
     # serve per mettere un domain ai campi o2m
     sezione_modello = fields.Selection(selection=[('ro_obiettivi', 'ro_obiettivi'), ('ro_efficacia', 'ro_efficacia'),
-                                                  ('rnc_descrizione', 'rnc_descizione'), ('rnc_trattamento', 'rnc_trattamento'),
+                                                  ('rnc_descrizione', 'rnc_descrizione'), ('rnc_trattamento', 'rnc_trattamento'),
                                                   ('ac_documentazione', 'ac_documentazione'), ('ac_supporto', 'ac_supporto'), ('ac_chiusura', 'ac_chiusura')])
     azione_correttiva_id = fields.Many2one('azione.correttiva')

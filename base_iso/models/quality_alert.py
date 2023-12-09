@@ -30,7 +30,7 @@ class RapportoNonconformitaAlert(models.Model):
     chiusura_rdq = fields.Boolean()
 
     # campi descrizione
-    imputato_a = fields.Selection(selection=[('dependente', 'Dipendente'), ('cliente', 'Cliente'), ('fornitore', 'Fornitore')])
+    imputato_a = fields.Selection(selection=[('dipendente', 'Dipendente'), ('cliente', 'Cliente'), ('fornitore', 'Fornitore')])
     imputato_employee_id = fields.Many2one('hr.employee')
     imputato_partner_id = fields.Many2one('res.partner')
     nc_tipologia = fields.Selection([('interna', 'Interna'), ('esterna', 'Esterna')])
@@ -62,3 +62,11 @@ class RapportoNonconformitaAlert(models.Model):
     employee_formazione_qualification_id = fields.Many2one('hr.employee.qualification')
     processo_id = fields.Many2one('processo.iso')
     audit_id = fields.Many2one('processo.audit')
+
+    @api.onchange('imputato_a')
+    def onchange_imputato_a(self):
+        for rec in self:
+            if rec.imputato_a == 'cliente':
+                return {'domain': {'imputato_partner_id': [('is_customer', '=', True)]}}
+            if rec.imputato_a == 'fornitore':
+                return {'domain': {'imputato_partner_id': [('is_supplier', '=', True)]}}

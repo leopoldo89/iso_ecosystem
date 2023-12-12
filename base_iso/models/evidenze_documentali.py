@@ -17,6 +17,8 @@ class EvidenzaDocumentale(models.Model):
     audit_id = fields.Many2one('processo.audit')
     risk_opp_id = fields.Many2one('risk.opportunity.base')
     quality_alert_id = fields.Many2one('quality.alert')
+    project_id = fields.Many2one('project.project')
+    project_obiettivo_id = fields.Many2one('project.obiettivo')
 
     # campo utile quando bisogna avere più tabelle O2M di evidenza documentale in uno stesso modello
     # serve per mettere un domain ai campi o2m

@@ -30,3 +30,4 @@ access_processo_iso_indicatore,access_processo_iso_indicatore,model_processo_iso
 access_processo_iso_input_output,access_processo_iso_input_output,model_processo_iso_input_output,base.group_user,1,1,1,1
 access_rischio_iso,access_rischio_iso,model_rischio_iso,base.group_user,1,1,1,1
 access_gruppo_lavoro_iso,access_gruppo_lavoro_iso,model_gruppo_lavoro_iso,base.group_user,1,1,1,1
+access_project_obiettivo,access_project_obiettivo,model_project_obiettivo,base.group_user,1,1,1,1

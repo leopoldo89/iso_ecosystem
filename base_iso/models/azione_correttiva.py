@@ -35,7 +35,7 @@ class AzioneCorrettiva(models.Model):
     name = fields.Char(string="N° AC")
     richiesta_employee_id = fields.Many2one('hr.employee')
     richiesta_il = fields.Date()
-    descrizione = fields.Char()
+    descrizione = fields.Text()
     rdq_gruppo_ids = fields.One2many('gruppo.lavoro.iso', 'azione_correttiva_id', domain=[('tipologia_gruppo', '=', 'ac_anagrafica')])
     apertura_ac = fields.Boolean()
     data_apertura = fields.Date()

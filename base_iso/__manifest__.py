@@ -9,7 +9,7 @@
     'category': 'Tools',
     'version': '16.0.1',
     'depends': ['base','partner_autocomplete', 'contacts', 'hr', 'hr_skills', 'product', 'stock',
-                'quality_control', 'partner_manual_rank', 'mrp', 'maintenance', 'mrp_maintenance', 'stock_barcode'],
+                'quality_control', 'partner_manual_rank', 'mrp', 'maintenance', 'mrp_maintenance', 'stock_barcode', 'project'],
     'data': [
         'security/ir.model.access.csv',
         'data/data.xml',
@@ -30,6 +30,7 @@
         'views/opportunita_iso_views.xml',
         'views/quality_alert_views.xml',
         'views/azione_correttiva_views.xml',
+        'views/project_project_views.xml'
     ],
     "images": ['static/description/icon.png'],
     "application": True

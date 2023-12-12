@@ -7,17 +7,17 @@
         <field name="priority">18</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='category_id']" position="before">
-                <field class="bg-warning" name="internal_reference" string="Cod. Interno" />
-                <field class="bg-warning" name="barcode" />
+                <field class="bg-warning bg-opacity-25" name="internal_reference" string="Cod. Interno" />
+                <field class="bg-warning bg-opacity-25" name="barcode" />
             </xpath>
 
             <xpath expr="//field[@name='workcenter_id']" position="after">
-                <field class="bg-warning" name="macchinario_id" string="Macchinario" />
+                <field class="bg-warning bg-opacity-25" name="macchinario_id" string="Macchinario" />
             </xpath>
 
             <xpath expr="//field[@name='note']" position="after">
                 <separator string="Documentazione"/>
-                <field class="bg-warning" name="documentazione_ids">
+                <field class="bg-warning bg-opacity-25" name="documentazione_ids">
                     <tree editable="bottom">
                         <field name="date" string="Data" />
                         <field name="description" string="Descrizione"/>
@@ -30,13 +30,13 @@
             </xpath>
 
             <xpath expr="//field[@name='partner_id']" position="after">
-                <field class="bg-warning" name="produttore" string="Produttore" />
+                <field class="bg-warning bg-opacity-25" name="produttore" string="Produttore" />
             </xpath>
 
             <xpath expr="//field[@name='model']" position="after">
-                <field class="bg-warning" name="fabbricante" string="Fabbricante" />
-                <field class="bg-warning" name="anno_fabbricazione" />
-                <field class="bg-warning" name="assistenza">
+                <field class="bg-warning bg-opacity-25" name="fabbricante" string="Fabbricante" />
+                <field class="bg-warning bg-opacity-25" name="anno_fabbricazione" />
+                <field class="bg-warning bg-opacity-25" name="assistenza">
                     <tree>
                         <field name="name" string="Nome" />
                         <field name="mobile" string="Cellulare" />
@@ -49,21 +49,21 @@
             <xpath expr="//page[@name='product_information']/group" position="after">
                 <group>
                     <group>
-                        <field class="bg-warning" name="modifiche_revisioni" string="Modifiche/Revisioni"/>
-                        <field class="bg-warning" name="anno_revisione" string="Anno revisione"/>
-                        <field class="bg-warning" name="revisionatore" string="Revisionatore"/>
-                        <field class="bg-warning" name="costo_revisione" />
+                        <field class="bg-warning bg-opacity-25" name="modifiche_revisioni" string="Modifiche/Revisioni"/>
+                        <field class="bg-warning bg-opacity-25" name="anno_revisione" string="Anno revisione"/>
+                        <field class="bg-warning bg-opacity-25" name="revisionatore" string="Revisionatore"/>
+                        <field class="bg-warning bg-opacity-25" name="costo_revisione" />
                     </group>
                 </group>
             </xpath>
 
             <xpath expr="//field[@name='next_action_date']" position="before">
-                <field class="bg-warning" name="descrizione_manutenzione" string="Descrizione Manutenzione" />
+                <field class="bg-warning bg-opacity-25" name="descrizione_manutenzione" string="Descrizione Manutenzione" />
             </xpath>
 
             <xpath expr="//page[@name='maintenance']" position="inside">
                 <separator string="Ricambi / materiali di consumo" />
-                <field class="bg-warning" name="ricambi_consumi_ids">
+                <field class="bg-warning bg-opacity-25" name="ricambi_consumi_ids">
                     <tree>
                         <field name="name"></field>
                         <field name="barcode" />
@@ -83,7 +83,7 @@
                 </field>
 
                 <separator string="Schede di manutenzione" />
-                <field  class="bg-warning" name="request_operation_ids">
+                <field  class="bg-warning bg-opacity-25" name="request_operation_ids">
                     <tree>
                         <field name="data_manutenzione" />
                         <field name="tipo_manutenzione" string="Tipo Manutenzione" />
@@ -96,9 +96,9 @@
             <xpath expr="//notebook" position="inside">
                 <page name="tarature" string="Tarature">
                     <group>
-                        <field  class="bg-warning" name="taratura_ids" string="Indicatori Taratura" widget="many2many_tags"/>
+                        <field  class="bg-warning bg-opacity-25" name="taratura_ids" string="Indicatori Taratura" widget="many2many_tags"/>
                     </group>
-                    <field  class="bg-warning" name="taratura_value_ids">
+                    <field  class="bg-warning bg-opacity-25" name="taratura_value_ids">
                         <tree editable="bottom">
                             <field name="taratura_id" string="indicatore"/>
                             <field name="data_taratura" string="Data Taratura"/>

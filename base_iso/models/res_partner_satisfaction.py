@@ -35,8 +35,10 @@ class QualificaCliente(models.Model):
     richieste_partner = fields.Html()
     data_next_audit = fields.Date()
 
-
     # campi RNC
     rnc_filter_data_da = fields.Date()
     rnc_filter_data_a = fields.Date()
     non_conformita_ids = fields.One2many('quality.alert', 'satisfaction_id')
+
+    # campi relazionali
+    riesame_direzione_id = fields.Many2one('riesame.direzione')

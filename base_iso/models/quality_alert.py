@@ -1,5 +1,6 @@
 from odoo import api, models, fields
 
+
 class ProcessoIsoRnc(models.Model):
 
     _name = 'processo.iso.coinvolto'
@@ -8,12 +9,13 @@ class ProcessoIsoRnc(models.Model):
     quality_alert_id = fields.Many2one('quality.alert')
     azione_correttiva_id = fields.Many2one('azione.correttiva')
 
+
 class RapportoNonconformitaAlert(models.Model):
 
     _inherit = 'quality.alert'
 
     # campi angrafica
-    tipo = fields.Selection([('interna', 'Interna'), ('esterna', 'Esterna')])
+    tipo = fields.Selection([('interna', 'Interna'), ('esterna', 'Esterna'), ('sistema', 'Sistema')])
     richiesta_interna_id = fields.Many2one('hr.employee')
     richiesta_esterna_id = fields.Many2one('res.partner')
     rilevata_il = fields.Date()

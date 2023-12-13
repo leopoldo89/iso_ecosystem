@@ -19,3 +19,4 @@ class RischioIso(models.Model):
     # relazioni ad altre entita
     processo_id = fields.Many2one('processo.iso')
     audit_id = fields.Many2one('processo.audit')
+    riesame_direzione_id = fields.Many2one('riesame.direzione')

@@ -15,7 +15,8 @@ class GruppoLavoroIso(models.Model):
     tipologia_gruppo = fields.Selection(selection=[('ro_anagrafica', 'ro_anagrafica'),  ('ro_obiettivi', 'ro_obiettivi'),
                                                    ('ro_azioni', 'ro_azioni'), ('ro_risorse', 'ro_risorse'), ('ro_piano', 'ro_piano'),
                                                    ('ro_efficacia', 'ro_efficacia'), ('ac_anagrafica', 'ac_anagrafica'),
-                                                   ('ac_azioni', ('ac_azioni'))])
+                                                   ('ac_azioni', 'ac_azioni'), ('rd_anagrafica', 'rd_anagrafica'),
+                                                   ('rd_valutazione', 'rd_valutazione')])
 
     # campi relazionali
     risk_opp_id = fields.Many2one('risk.opportunity.base')
@@ -23,6 +24,7 @@ class GruppoLavoroIso(models.Model):
     azione_correttiva_id = fields.Many2one('azione.correttiva')
     project_id = fields.Many2one('project.project')
     project_obiettivo_id = fields.Many2one('project.obiettivo')
+    riesame_direzione_id = fields.Many2one('riesame.direzione')
 
     @api.onchange('partner_id')
     def onchange_partner_id(self):

@@ -31,3 +31,10 @@ access_processo_iso_input_output,access_processo_iso_input_output,model_processo
 access_rischio_iso,access_rischio_iso,model_rischio_iso,base.group_user,1,1,1,1
 access_gruppo_lavoro_iso,access_gruppo_lavoro_iso,model_gruppo_lavoro_iso,base.group_user,1,1,1,1
 access_project_obiettivo,access_project_obiettivo,model_project_obiettivo,base.group_user,1,1,1,1
+access_riesame_direzione,access_riesame_direzione,model_riesame_direzione,base.group_user,1,1,1,1
+access_riesame_nota_ente,access_riesame_nota_ente,model_riesame_nota_ente,base.group_user,1,1,1,1
+access_riesame_obiettivo,access_riesame_obiettivo,model_riesame_obiettivo,base.group_user,1,1,1,1
+access_riesame_parte_interessata,access_riesame_parte_interessata,model_riesame_parte_interessata,base.group_user,1,1,1,1
+access_riesame_risorsa_umana,access_riesame_risorsa_umana,model_riesame_risorsa_umana,base.group_user,1,1,1,1
+access_riesame_risorsa_materiale,access_riesame_risorsa_materiale,model_riesame_risorsa_materiale,base.group_user,1,1,1,1
+access_riesame_output,access_riesame_output,model_riesame_output,base.group_user,1,1,1,1

@@ -17,3 +17,4 @@ from . import processo_audit
 from . import evidenze_documentali
 from . import gruppo_lavoro
 from . import project_project
+from . import riesame_direzione

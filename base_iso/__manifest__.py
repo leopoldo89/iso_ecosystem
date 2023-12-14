@@ -32,6 +32,7 @@
         'views/azione_correttiva_views.xml',
         'views/project_project_views.xml',
         'views/riesame_direzione_views.xml',
+        'views/hr_employee_views.xml',
     ],
     "images": ['static/description/icon.png'],
     "application": True

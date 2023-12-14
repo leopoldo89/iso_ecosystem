@@ -38,3 +38,5 @@ access_riesame_parte_interessata,access_riesame_parte_interessata,model_riesame_
 access_riesame_risorsa_umana,access_riesame_risorsa_umana,model_riesame_risorsa_umana,base.group_user,1,1,1,1
 access_riesame_risorsa_materiale,access_riesame_risorsa_materiale,model_riesame_risorsa_materiale,base.group_user,1,1,1,1
 access_riesame_output,access_riesame_output,model_riesame_output,base.group_user,1,1,1,1
+access_sigla_collaboratore,access_sigla_collaboratore,model_sigla_collaboratore,base.group_user,1,1,1,1
+access_tipo_produzione,access_tipo_produzione,model_tipo_produzione,base.group_user,1,1,1,1

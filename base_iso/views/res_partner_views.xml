@@ -3,10 +3,31 @@
         <field name="name">view_partner_form_inherit_iso</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority">20</field>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='mobile']" position="after">
-                <field name="certificazione_iso" string="Cert. ISO" />
+
+            <xpath expr="//field[@name='function']" position="replace">
+                <field name="funzione_aziendale_id" />
+                <field name="reparto_id" string="Reparto" />
             </xpath>
+
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="iso_qualification" string="Qualifiche Iso">
+                    <field name="qualification_ids">
+                        <tree>
+                            <field name="data_qualifica" />
+                            <field name="tipo_qualifica" />
+                            <field name="valutazione_finale" />
+                            <field name="lead_auditor_ids" widget="many2many_tags"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+            <xpath expr="//group[@name='purchase']/field[@name='is_supplier']" position="after">
+                <field name="tipo_produzione_ids" widget="many2many_tags" attrs="{'invisible':[('is_supplier', '!=', True)]}"/>
+            </xpath>
+
         </field>
     </record>
 

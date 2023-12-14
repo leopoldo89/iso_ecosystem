@@ -43,7 +43,7 @@ class RiesameRisorsaUmana(models.Model):
 
     riesame_direzione_id = fields.Many2one('riesame.direzione')
     descrizione = fields.Html()
-    funziona_aziendale = fields.Many2one('hr.job')
+    funziona_aziendale_id = fields.Many2one('hr.job')
     entro_il = fields.Date()
     budget = fields.Float()
     responsabile_employee_id = fields.Many2one('hr.employee')

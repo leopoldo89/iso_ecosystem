@@ -18,3 +18,4 @@ from . import evidenze_documentali
 from . import gruppo_lavoro
 from . import project_project
 from . import riesame_direzione
+from . import hr_employee

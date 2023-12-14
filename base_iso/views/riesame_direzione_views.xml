@@ -28,8 +28,9 @@
                     </group>
 
                     <notebook >
-                        <page string="Revisione DDQ" name="revisione_ddq">
 
+
+                        <page string="Revisione DDQ" name="revisione_ddq">
                             <separator string="Documenti revisionati" />
                             <field name="rddq_documentazione_ids" nolabel="1" context="{'default_sezione_modello':'rd_revisione_ddq'}">
                                 <tree editable="bottom">
@@ -44,6 +45,8 @@
                             <separator string="Note Generali" />
                             <field name="rddq_note" string="Note" />
                         </page>
+
+
                         <page string="Riesame precedente" name="riesame_precedente">
                             <group>
                                 <field name="rp_riesame_precedente_id" string="Riesame precedente" />
@@ -60,8 +63,264 @@
                                     </tree>
                                 </field>
                             </group>
+
                             <separator string="NOTE E INDIRIZZI STRATEGICI" />
                             <field name="rp_note_ente_ids" string="Note e indirizzi" />
+                        </page>
+
+                        <page name="non_conformita" string="Non Conformità">
+                            <separator string="RNC di Sistema" />
+                            <field name="nc_sistema_ids" >
+                                <tree>
+                                    <field name="name" string="identificativo" readonly="1" optional="show"/>
+                                    <field name="nc_data" string="NC Del"/>
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="entro_il" />
+                                    <field name="nc_data_risoluzione" strin="Risolta il"/>
+                                    <field name="nc_costo" strin="Costo NC" />
+                                </tree>
+                            </field>
+
+                            <separator string="RNC Interne" />
+                            <field name="nc_interne_ids"  >
+                                <tree>
+                                    <field name="name" string="identificativo" readonly="1" optional="show"/>
+                                    <field name="nc_data" string="NC Del"/>
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="entro_il" />
+                                    <field name="nc_data_risoluzione" strin="Risolta il"/>
+                                    <field name="nc_costo" strin="Costo NC" />
+                                </tree>
+                            </field>
+
+                            <separator string="RNC esterne" />
+                            <field name="nc_esterne_ids" >
+                                <tree>
+                                    <field name="name" string="identificativo" readonly="1" optional="show"/>
+                                    <field name="nc_data" string="NC Del"/>
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="entro_il" />
+                                    <field name="nc_data_risoluzione" strin="Risolta il"/>
+                                    <field name="nc_costo" strin="Costo NC" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page name="audit_process" string="Audit di processo">
+                            <separator string="Note Generali" />
+                            <field name="ap_note"  />
+
+                            <separator string="Audit di processo" />
+                            <field name="ap_audit_ids">
+                                <tree>
+                                    <field name="data_audit" />
+                                    <field name="validatore_finale" />
+                                    <field name="note_finali" />
+                                    <field name="miglioramenti" />
+                                    <field name="data_prossimo_audit" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page name="obiettivi_precedenti" string="Obiettivi Precedenti">
+                            <field name="obiettivi_precedenti_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="Titolo Obiettivo"/>
+                                    <field name="descrizione" />
+                                    <field name="entro_il" />
+                                    <field name="risorse"/>
+                                    <field name="note_finali"/>
+                                    <field name="conclusa_il"/>
+                                    <field name="attachment_name" invisible="1"/>
+                                    <field name="attachment" filename="attachament_name" widget="binary" string="Allegato" options="{'accepted_file_extensions': '.pdf'}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page name="contesto" string="Contesto">
+                            <group>
+                                <field name="co_indirizzi_finalita" string="Indirizzi e finalità"/>
+                                <field name="co_parte_interessata_ids" string="Parti Interessate">
+                                    <tree editable="bottom">
+                                        <field name="nome" />
+                                        <field name="rilevanza"/>
+                                    </tree>
+                                </field>
+                                <field name="co_fattori_interni" string="Fattori interni" />
+                                <field name="co_fattori_esterni" string="Fattori esterni" />
+                                <field name="co_evoluzioni_mercato" string="Evoluzioni di mercato" />
+                            </group>
+                        </page>
+
+                        <page name="rischi_opportunita" string="Rischi/Opportunita">
+                            <separator string="Rischi" />
+                            <field name="ro_rischi_ids">
+                                <tree >
+                                    <field name="name" />
+                                    <field name="data" />
+                                    <field name="rischio_identificato" />
+                                    <field name="validazione_finale" />
+                                    <field name="validatore_interno" />
+                                </tree>
+                            </field>
+
+                            <separator string="Opportunità" />
+                            <field name="ro_opportunita_ids">
+                                <tree >
+                                    <field name="name" />
+                                    <field name="data" />
+                                    <field name="opportunita_identificata" />
+                                    <field name="validazione_finale" />
+                                    <field name="validatore_interno" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page name="risorse_umane" string="Risorse umane" >
+                            <separator string="Descrizione Generale"/>
+                            <field name="ru_descrizione" />
+
+                            <separator string="Formazione svolta"/>
+                            <field name="ru_formazione_svolta_ids">
+                                <tree>
+                                    <field name="employee_id" string="Collaboratore" />
+                                    <field name="f_terminata_il" string="Terminata il" />
+                                    <field name="argomento_formazione" />
+                                    <field name="v_valutazione" string="Valutazione"/>
+                                    <field name="v_vericatore_interno_id" string="Verificatore Interno"/>
+                                </tree>
+                            </field>
+
+                            <separator string="Formazione futura"/>
+                            <field name="ru_formazione_futura_ids">
+                                <tree>
+                                    <field name="employee_id" string="Collaboratore" />
+                                    <field name="entro_il" string="Entro il" />
+                                    <field name="argomento_formazione" />
+                                    <field name="tutor_interno_id" string="Tutor Interno"/>
+                                    <field name="tutor_esterno_id" string="Tutor esterno"/>
+                                </tree>
+                            </field>
+
+                            <separator string="Risorse Umane Necessarie"/>
+                            <field name="ru_risorse_umane_ids">
+                                <tree editable="bottom">
+                                    <field name="descrizione" />
+                                    <field name="funziona_aziendale_id" string="FA" />
+                                    <field name="entro_il" />
+                                    <field name="budget"/>
+                                    <field name="responsabile_employee_id" string="Responsabile"/>
+                                </tree>
+                            </field>
+                            <separator string="Note"/>
+                            <field name="ru_note" />
+                        </page>
+
+                        <page name="risorse_materiali" string="Risorse Materiali">
+                            <separator string="Descrizione Generale"/>
+                            <field name="rm_descrizione"/>
+
+                            <separator string="Risorse Previste"/>
+                            <field name="rm_risorse_materiali_ids">
+                                <tree editable="bottom">
+                                    <field name="data"/>
+                                    <field name="descrizione"/>
+                                    <field name="budget"/>
+                                    <field name="urgenza"/>
+                                    <field name="entro_il"/>
+                                    <field name="responsabile_employee_id" string="Responsabile"/>
+                                </tree>
+                            </field>
+
+                            <separator string="Note finali"/>
+                            <field name="rm_note" />
+                        </page>
+
+                        <page name="soddisfazione_cliente" string="Soddisfazione del cliente">
+                            <separator string="Descrizione Generale"/>
+                            <field name="sc_descrizione"/>
+
+                            <separator string="Soddisfazione del cliente"/>
+                            <field name="sc_soddisfazioni_ids">
+                                <tree >
+                                    <field name="data_verifica"/>
+                                    <field name="tipo_verifica"/>
+                                    <field name="totale_valutazione"/>
+                                    <field name="note_finali"/>
+                                    <field name="data_next_audit"/>
+                                    <field name="lead_auditor_ids" string="Auditor"/>
+                                </tree>
+                            </field>
+
+                            <separator string="Note"/>
+                            <field name="sc_note"/>
+                        </page>
+
+                        <page name="output" string="Output">
+                            <separator string="Miglioramenti del SGQ"/>
+                            <field name="o_output_sqg_ids" context="{'tipo_output':'miglioramenti_sqg'}">
+                                <tree editable="bottom">
+                                    <field name="descrizione"/>
+                                    <field name="entro_il"/>
+                                    <field name="addetto_id"/>
+                                    <field name="risorse"/>
+                                    <field name="tipo_output" invisible="1" />
+                                </tree>
+                            </field>
+
+                            <separator string="Miglioramenti operativi"/>
+                            <field name="o_output_operativi_ids" context="{'tipo_output':'miglioramenti_operativi'}">
+                                <tree editable="bottom">
+                                    <field name="descrizione"/>
+                                    <field name="entro_il"/>
+                                    <field name="addetto_id"/>
+                                    <field name="risorse"/>
+                                    <field name="tipo_output" invisible="1" />
+                                </tree>
+                            </field>
+
+                            <separator string="Investimenti futuri"/>
+                            <field name="o_output_investimenti_ids" context="{'tipo_output':'investimenti_futuri'}">
+                                <tree editable="bottom">
+                                    <field name="descrizione"/>
+                                    <field name="entro_il"/>
+                                    <field name="addetto_id"/>
+                                    <field name="risorse"/>
+                                    <field name="tipo_output" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page name="obiettivi_futuri" string="Obiettivi Prossimo Riesame">
+                            <field name="obiettivi_futuri_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="Titolo Obiettivo"/>
+                                    <field name="descrizione" />
+                                    <field name="entro_il" />
+                                    <field name="risorse"/>
+                                    <field name="note_finali"/>
+                                    <field name="conclusa_il"/>
+                                    <field name="attachment_name" invisible="1"/>
+                                    <field name="attachment" filename="attachament_name" widget="binary" string="Allegato" options="{'accepted_file_extensions': '.pdf'}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page name="valutazioni_finali" string="Valutazioni finali">
+                            <separator string="Note ed indirizzi Strategici"/>
+                            <field name="vf_note" />
+
+                            <separator string="Team di validazione"/>
+                            <field name="vf_validazione_gruppo_ids" context="{'default_tipologia_gruppo':'rd_valutazione'}">
+                                <tree editable="bottom">
+                                    <field name="employee_id" string="Collaboratore interno" />
+                                    <field name="partner_id" string="Collaboratore esterno" />
+                                    <field name="tipologia_gruppo" invisible="1"/>
+                                </tree>
+                            </field>
+
+                            <separator string="Prossimo Riesame"/>
+                            <field name="vf_prossimo_riesame" />
                         </page>
                     </notebook>
                 </sheet>

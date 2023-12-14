@@ -14,6 +14,9 @@
     <record id="partner_category_rappresentante" model="res.partner.category">
         <field name="name">Rappresentante</field>
     </record>
+    <record id="partner_category_terzista" model="res.partner.category">
+        <field name="name">Terzista</field>
+    </record>
 
 
     <!--  TIPOLOGIE DI RISORTA TECNICA/ATTREZZATURA  -->
@@ -45,4 +48,21 @@
         <field name="name">Strumenti elettronici o informatici</field>
         <field name="note">Computer, server, stampanti, etc.</field>
     </record>
+
+    <!--  SIGLE COLLABORATORE  -->
+    <record id="sigla_collaboratore_signore" model="sigla.collaboratore">
+        <field name="name">Sign.</field>
+    </record>
+    <record id="sigla_collaboratore_signora" model="sigla.collaboratore">
+        <field name="name">Sign.ra</field>
+    </record>
+
+    <!--  TIPO PRODUZIONE  -->
+    <record id="tipo_produzione_beni" model="tipo.produzione">
+        <field name="name">Beni</field>
+    </record>
+    <record id="tipo_produzione_servizi" model="tipo.produzione">
+        <field name="name">Servizi</field>
+    </record>
+
 </odoo>

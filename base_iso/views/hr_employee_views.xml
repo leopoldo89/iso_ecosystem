@@ -1,0 +1,29 @@
+<odoo>
+    <record id="view_hr_employee_form_inherit_iso" model="ir.ui.view">
+        <field name="name">view_hr_employee_form_inherit_iso</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='job_id']" position="after">
+                <field name="fa_secondaria_ids" string="FA Svolte">
+                    <tree editable="bottom">
+                        <field name="sigla_fa" />
+                        <field name="name" />
+                        <field name="livello_gerarchia" />
+                    </tree>
+                </field>
+            </xpath>
+
+            <xpath expr="//field[@name='department_id']" position="before">
+                <field name="data_assunzione" />
+            </xpath>
+
+            <xpath expr="//field[@name='mobile_phone']" position="before">
+                <field name="sigla_collaboratore_id" />
+            </xpath>
+
+        </field>
+    </record>
+    
+</odoo>

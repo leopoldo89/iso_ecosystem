@@ -6,13 +6,27 @@
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='job_id']" position="after">
-                <field name="fa_secondaria_ids" string="FA Svolte">
+
+                <field name="department_ids" string="Dipartimenti" widget="many2many_tags"/>
+
+                <separator string="FA Svolte" />
+                <field name="fa_svolte_ids" nolabel="1" colspan="2">
                     <tree editable="bottom">
-                        <field name="sigla_fa" />
-                        <field name="name" />
+                        <field name="job_id" string="FA" />
+                        <field name="sigla_fa" string="Sigla"/>
                         <field name="livello_gerarchia" />
+                        <field name="superiorie_id" />
                     </tree>
                 </field>
+            </xpath>
+            <xpath expr="//field[@name='job_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
             </xpath>
 
             <xpath expr="//field[@name='department_id']" position="before">
@@ -25,5 +39,46 @@
 
         </field>
     </record>
-    
+
+    <record id="view_hr_employee_tree_inherit_iso" model="ir.ui.view">
+        <field name="name">view_hr_employee_tree_inherit_iso</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='job_id']" position="after">
+                <field name="department_ids" string="Dipartimenti" widget="many2many_tags"/>
+                <field name="fa_svolte_ids" string="FA Svolte" widget="many2many_tags" />
+            </xpath>
+            <xpath expr="//field[@name='job_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='department_id']" position="before">
+                <field name="data_assunzione" />
+            </xpath>
+
+
+        </field>
+    </record>
+
+    <record id="view_hr_employee_search_inherit_iso" model="ir.ui.view">
+        <field name="name">view_hr_employee_search_inherit_iso</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="fa_svolte_ids" string="Funzione Aziendale" filter_domain="[('fa_svolte_ids.job_id', 'ilike', self)]" />
+                <field name="department_ids" string="Dipartimento" filter_domain="[('department_ids', 'ilike', self)]" />
+            </xpath>
+
+        </field>
+    </record>
+
 </odoo>

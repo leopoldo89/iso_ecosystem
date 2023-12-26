@@ -7,7 +7,9 @@
         <field name="priority">18</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='category_id']" position="before">
-                <field class="bg-warning bg-opacity-25" name="internal_reference" string="Cod. Interno" />
+                <!--       queste due righe servono per inserire dello stile nella label         -->
+                <label string="Cod. Interno" class="bg-warning bg-opacity-25" for="internal_reference" />
+                <field name="internal_reference"  nolabel="1"/>
                 <field class="bg-warning bg-opacity-25" name="barcode" />
             </xpath>
 

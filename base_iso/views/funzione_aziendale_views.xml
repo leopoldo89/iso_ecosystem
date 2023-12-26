@@ -49,7 +49,7 @@
                     <field name="employee_ids">
                         <tree>
                             <field name="name" string="Nome"/>
-                            <field name="department_id" />
+                            <field name="department_ids" />
                         </tree>
                     </field>
                 </page>

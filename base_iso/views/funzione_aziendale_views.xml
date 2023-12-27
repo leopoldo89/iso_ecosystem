@@ -9,22 +9,27 @@
                 <group>
                     <group>
                         <field name="parent_id" string="FA superiore"/>
-                        <field name="department_id" string="Dipartimento" />
-                        <field name="sigla_fa" string="Sigla FA" />
-                        <field name="responsible_employee_ids" string="Responsabile Di:">
+                        <label string="Dipartimento" class="bg-warning bg-opacity-25" for="department_id" />
+                        <field name="department_id" string="Dipartimento" nolabel="1" />
+                        <label string="Sigla FA" class="bg-warning bg-opacity-25" for="sigla_fa" />
+                        <field name="sigla_fa" string="Sigla FA" nolabel="1" />
+                        <label string="Responsabile di" class="bg-warning bg-opacity-25" for="responsible_employee_ids" />
+                        <field name="responsible_employee_ids" string="Responsabile di:" nolabel="1">
                             <tree>
                                 <field name="name" string="Nome" />
                                 <field name="job_id" string="FA Primaria" />
                             </tree>
                         </field>
-                        <field name="livello_gerarchia" />
-                        <field name="risponde_a" />
+                        <label string="Livello Gerarchia" class="bg-warning bg-opacity-25" for="livello_gerarchia" />
+                        <field name="livello_gerarchia" nolabel="1"/>
+                        <label string="Risponde a" class="bg-warning bg-opacity-25" for="responsible_employee_ids" />
+                        <field name="risponde_a" nolabel="1"/>
                     </group>
                 </group>
 
             </xpath>
             <xpath expr="//page[@name='job_description_page']" position="after" >
-                <page string="Qualifiche">
+                <page string="Qualifiche" class="bg-warning bg-opacity-25" >
                     <field name="qualifiche_ids">
                         <tree editable="bottom">
                             <field name="name" string="Descrizione" />
@@ -35,7 +40,7 @@
                     </field>
 
                 </page>
-                <page string="Competenze">
+                <page string="Competenze" class="bg-warning bg-opacity-25">
                     <field name="skill_ids">
                         <tree editable="bottom">
                             <field name="skill_type_id" string="Tipo competenza" />
@@ -46,7 +51,7 @@
                     </field>
 
                 </page>
-                <page string="Addetti alla funzione">
+                <page string="Addetti alla funzione" class="bg-warning bg-opacity-25">
                     <field name="employee_ids">
                         <tree>
                             <field name="name" string="Nome"/>
@@ -57,7 +62,7 @@
                 <xpath expr="//page[@name='recruitment_page']" position="move"/>
             </xpath>
             <xpath expr="//page[@name='job_description_page']" position="attributes" >
-                <field name="string">Mansionario</field>
+                <attribute name="string">Mansionario</attribute>
             </xpath>
 
         </field>

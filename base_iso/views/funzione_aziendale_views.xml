@@ -8,6 +8,7 @@
             <xpath expr="//div[hasclass('oe_title')]" position="after">
                 <group>
                     <group>
+                        <field name="parent_id" string="FA superiore"/>
                         <field name="department_id" string="Dipartimento" />
                         <field name="sigla_fa" string="Sigla FA" />
                         <field name="responsible_employee_ids" string="Responsabile Di:">

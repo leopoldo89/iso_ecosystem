@@ -29,31 +29,32 @@ from odoo.http import request
 class EmployeeChart(http.Controller):
 
     @http.route('/get/parent/colspan', type='json', auth='public', methods=['POST'], csrf=False)
-    def get_col_span(self, emp_id):
-        if emp_id:
-            employee = request.env['hr.employee'].sudo().browse(int(emp_id))
-            if employee.child_ids:
-                child_count = len(employee.child_ids) * 2
+    def get_col_span(self, job_id):
+        if job_id:
+            job_obj = request.env['hr.job'].sudo().browse(int(job_id))
+            if job_obj.child_ids:
+                child_count = len(job_obj.child_ids) * 2
                 return child_count
 
-    @http.route('/get/parent/employee', type='json', auth='public', methods=['POST'], csrf=False)
-    def get_employee_ids(self):
-        employees = request.env['hr.employee'].sudo().search([('parent_id', '=', False)])
+    @http.route('/get/parent/job', type='json', auth='public', methods=['POST'], csrf=False)
+    def get_job_ids(self):
+        "funzione per recuperare la funzione aziendale all'apice"
+        jobs = request.env['hr.job'].sudo().search([('parent_id', '=', False)])
         names = []
         key = []
-        if len(employees) == 1:
-            key.append(employees.id)
-            key.append(len(employees.child_ids))
+        if len(jobs) == 1:
+            key.append(jobs.id)
+            key.append(len(jobs.child_ids))
             return key
-        elif len(employees) == 0:
+        elif len(jobs) == 0:
             raise UserError(
                 "Don't need to set manager to an employee at the top of the "
                 "chart")
         else:
-            for emp in employees:
-                names.append(emp.name)
+            for job in jobs:
+                names.append(job.name)
             raise UserError(
-                "These employee have no Manager %s" % (names))
+                "These jobs have no upper job %s" % (names))
 
     def get_lines(self, loop_count):
         if loop_count:
@@ -81,47 +82,46 @@ class EmployeeChart(http.Controller):
                     <table><tr><td><div>"""
                 view = """ <div id='""" + str(child.id) + """' class='o_level_1'><a>
                     <div id='""" + str(child.id) + """' class="o_employee_border">
-                    <img src='/web/image/hr.employee.public/""" + str(child.id) + """/image_1024/'/></div>
+                    </div>
                     <div class='employee_name'><p>""" + str(child.name) + """</p>
-                    <p>""" + str(child.job_id.name) + """</p></div></a></div>"""
+                    </div></a></div>"""
                 child_nodes += child_table + view + """</div></td></tr></table></td>"""
             nodes = child_nodes + """</tr>"""
             return nodes
 
-    @http.route('/get/parent/child', type='http', auth='user', methods=['POST'], csrf=False)
-    def get_parent_child(self, **post):
-        if post:
-            val = 0
-            for line in post:
-                if line:
-                    val = int(line)
-            child_ids = request.env['hr.employee'].sudo().browse(val).child_ids
-            emp = request.env['hr.employee'].sudo().browse(val)
-            table = """<table><tr><td colspan='""" + str(len(child_ids) * 2) + """'><div class="node">"""
-            view = """ <div id="parent" class='o_chart_head'><a>
-                <div id='""" + str(val) + """' class="o_employee_border">
-                <img class='o_emp_active' src='/web/image/hr.employee.public/""" + str(val) + """/image_1024/'/></div>
-                <div class='employee_name o_width'><p>""" + str(emp.name) + """</p>
-                <p>""" + str(emp.job_id.name) + """</p></div></a></div>"""
-            table += view + """</div></td></tr>"""
-            loop_len = len(child_ids)*2
-            lines = self.get_lines(loop_len)
-            nodes = self.get_nodes(child_ids)
-            table += lines + nodes
-            return table
+    @http.route('/get/parent/child', type='json', auth='user', methods=['POST'], csrf=False)
+    def get_parent_child(self, job_id):
+        """funzione per trovare le funzioni aziendali figli una funzione aziendale padre"""
+
+        job_id = request.env['hr.job'].sudo().browse(job_id)
+        child_job_ids = job_id.child_ids
+
+        table = """<table><tr><td colspan='""" + str(len(child_job_ids) * 2) + """'><div class="node">"""
+        view = """ <div id="parent" class='o_chart_head'><a>
+            <div id='""" + str(job_id.id) + """' class="o_employee_border">
+            </div>
+            <div class='employee_name o_width'><p>""" + str(job_id.name) + """</p>
+            </div></a></div>"""
+        table += view + """</div></td></tr>"""
+        loop_len = len(child_job_ids)*2
+        lines = self.get_lines(loop_len)
+        nodes = self.get_nodes(child_job_ids)
+        table += lines + nodes
+        return {'html': table, 'child_ids': child_job_ids.ids}
 
     @http.route('/get/child/data', type='json', auth='user', methods=['POST'], csrf=False)
     def get_child_data(self, click_id):
         if click_id:
-            employee = request.env['hr.employee'].sudo().browse(int(click_id))
-            if employee.child_ids:
-                child_count = len(employee.child_ids) * 2
+            job = request.env['hr.job'].sudo().browse(int(click_id))
+            if job.child_ids:
+                child_count = len(job.child_ids) * 2
                 value = [child_count]
                 lines = self.get_lines(child_count)
-                nodes = self.get_nodes(employee.child_ids)
+                nodes = self.get_nodes(job.child_ids)
                 child_table = lines + nodes
                 value.append(child_table)
-                return child_table
+                return {'html': child_table, 'child_ids': job.child_ids.ids, 'job_id': job.id, 'response': 'OK'}
+        return {'response': 'KO'}
 
 
 

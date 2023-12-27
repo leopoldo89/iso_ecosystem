@@ -7,12 +7,14 @@
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='function']" position="replace">
-                <field name="funzione_aziendale_id" />
-                <field name="reparto_id" string="Reparto" />
+                <label string="Funzione aziendale" class="bg-warning bg-opacity-25" for="funzione_aziendale_id" />
+                <field name="funzione_aziendale_id" nolabel="1" />
+                <label string="Reparto" class="bg-warning bg-opacity-25" for="reparto_id" />
+                <field name="reparto_id" nolabel="1" />
             </xpath>
 
             <xpath expr="//page[@name='internal_notes']" position="after">
-                <page name="iso_qualification" string="Qualifiche Iso">
+                <page name="iso_qualification" string="Qualifiche Iso" class="bg-warning bg-opacity-25">
                     <field name="qualification_ids">
                         <tree>
                             <field name="data_qualifica" />
@@ -25,6 +27,7 @@
             </xpath>
 
             <xpath expr="//group[@name='purchase']/field[@name='is_supplier']" position="after">
+                <!--TODO: se applico la strategia qui la voce si duplica-->
                 <field name="tipo_produzione_ids" widget="many2many_tags" attrs="{'invisible':[('is_supplier', '!=', True)]}"/>
             </xpath>
 

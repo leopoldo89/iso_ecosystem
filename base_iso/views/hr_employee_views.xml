@@ -7,9 +7,10 @@
 
             <xpath expr="//field[@name='job_id']" position="after">
 
-                <field name="department_ids" string="Dipartimenti" widget="many2many_tags"/>
+                <label string="Dipartimenti" class="bg-warning bg-opacity-25" for="department_ids" />
+                <field name="department_ids" widget="many2many_tags" nolabel="1"/>
 
-                <separator string="FA Svolte" />
+                <separator string="FA Svolte" class="bg-warning bg-opacity-25" />
                 <field name="fa_svolte_ids" nolabel="1" colspan="2">
                     <tree editable="bottom">
                         <field name="job_id" string="FA" />

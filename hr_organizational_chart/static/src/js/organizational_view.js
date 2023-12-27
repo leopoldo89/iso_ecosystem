@@ -17,7 +17,7 @@ var EmployeeOrganizationalChart =  AbstractAction.extend({
     },
 
     init: function(parent, context) {
-
+        this.checked_ids = []
         this._super(parent, context);
         this.renderEmployeeDetails();
     },
@@ -26,26 +26,35 @@ var EmployeeOrganizationalChart =  AbstractAction.extend({
         var self = this;
         console.log("hhhhh",this)
         this._rpc({
-            route: '/get/parent/employee',
+            route: '/get/parent/job',
         }).then(function (result) {
             self.parent_len = result[1];
-            $.ajax({
-                url: '/get/parent/child',
-                type: 'POST',
-                data: JSON.stringify(result[0]),
-                success: function (value) {
-                        $('#o_parent_employee').append(value);
-                        },
+            self._rpc({
+                route: '/get/parent/child',
+                params: {
+                    job_id: parseInt(result[0]),
+                },
+            }).then(function (value){
+
+                $('#o_parent_employee').append(value['html']);
+                self.checked_ids.push(result[0])
+                for(var i = 0;i < value['child_ids'].length; i++){
+                    if(!self.checked_ids.includes(value['child_ids'][i])){
+                        self._getChild_data(value['child_ids'][i]);
+                        self.checked_ids.push(value['child_ids'][i]);
+                    }
+                }
+
             });
 
         });
 
     },
-    _getChild_data: function(events){
-        console.log("evets",events)
-        if(events.target.parentElement.className){
+    _getChild_data: function(id){
+
+        if(id){
             var self = this
-            this.id = events.target.parentElement.id;
+            this.id = id;
             this.check_child =  $( "#"+this.id+".o_level_1" );
             if (this.check_child[0]){
                 this.colspan_td = this.check_child[0].parentElement.parentElement
@@ -55,7 +64,7 @@ var EmployeeOrganizationalChart =  AbstractAction.extend({
                     this._rpc({
                         route: '/get/parent/colspan',
                         params: {
-                            emp_id: parseInt(this.id),
+                            job_id: parseInt(this.id),
                         },
                     }).then(function (col_val){
                         if (col_val){
@@ -68,8 +77,22 @@ var EmployeeOrganizationalChart =  AbstractAction.extend({
                             click_id: parseInt(this.id),
                         },
                     }).then(function (result){
-                        if (result){
-                        $(result).appendTo(self.tbody_child);
+                        if (result['response'] == 'OK'){
+
+                            var check_child =  $( "#" + result['job_id'] + ".o_level_1" );
+                            if (check_child[0]) {
+                                var colspan_td = check_child[0].parentElement.parentElement
+                                colspan_td.colSpan = result['child_ids'].length*2
+                                var tbody_child = colspan_td.parentElement.parentElement
+                                $(result['html']).appendTo(tbody_child);
+                                self.checked_ids.push(result['job_id'])
+                                for(var i = 0;i < result['child_ids'].length; i++) {
+                                    if (!self.checked_ids.includes(result['child_ids'][i])) {
+                                        self._getChild_data(result['child_ids'][i]);
+                                        self.checked_ids.push(result['child_ids'][i]);
+                                    }
+                                }
+                            }
                         }
                     });
                 }
@@ -88,9 +111,9 @@ var EmployeeOrganizationalChart =  AbstractAction.extend({
         if (ev.target.parentElement.className){
             var id = parseInt(ev.target.parentElement.parentElement.children[0].id)
             this.do_action({
-            name: _t("Employee"),
+            name: _t("job"),
             type: 'ir.actions.act_window',
-            res_model: 'hr.employee',
+            res_model: 'hr.job',
             res_id: id,
             view_mode: 'form',
             views: [[false, 'form']],

@@ -18,6 +18,8 @@ class HrJobInherit(models.Model):
     livello_gerarchia = fields.Selection(selection=[("1", "1°"), ("2", "2°"), ("3", "3°"), ("4", "4°"), ("5", "5°")])
     risponde_a = fields.Many2one('hr.employee')
     responsible_employee_ids = fields.Many2many('hr.employee')
+    parent_id = fields.Many2one('hr.job')
+    child_ids = fields.One2many('hr.job', 'parent_id')
 
     qualifiche_ids = fields.One2many('hr.job.qualifica', 'job_id')
     skill_ids = fields.Many2many('hr.employee.skill', 'job_id')

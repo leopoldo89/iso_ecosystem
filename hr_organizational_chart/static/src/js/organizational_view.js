@@ -12,8 +12,7 @@ var EmployeeOrganizationalChart =  AbstractAction.extend({
 
     contentTemplate: 'OrganizationalEmployeeChart',
     events: {
-        'click img': '_getChild_data',
-        'click .employee_name': 'view_employee',
+
     },
 
     init: function(parent, context) {
@@ -24,7 +23,6 @@ var EmployeeOrganizationalChart =  AbstractAction.extend({
     renderEmployeeDetails: function (){
         var employee_id = 1
         var self = this;
-        console.log("hhhhh",this)
         this._rpc({
             route: '/get/parent/job',
         }).then(function (result) {
@@ -107,7 +105,6 @@ var EmployeeOrganizationalChart =  AbstractAction.extend({
         }
     },
     view_employee: function(ev){
-        console.log("viiii")
         if (ev.target.parentElement.className){
             var id = parseInt(ev.target.parentElement.parentElement.children[0].id)
             this.do_action({

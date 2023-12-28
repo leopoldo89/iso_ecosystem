@@ -7,7 +7,7 @@
 
     <menuitem
             id="menu_hr_employee_organizational_chart"
-            name="Organizational Chart"
+            name="Organigramma"
             action="action_organizational_chart"
             parent="hr.menu_hr_employee_payroll"
             sequence="6"/>

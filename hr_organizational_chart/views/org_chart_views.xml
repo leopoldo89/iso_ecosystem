@@ -6,7 +6,7 @@
   </record>
 
   <menuitem id="menu_hr_organizational_chart"
-    name="Organizational Chart"
+    name="Organigramma"
     action="organization_dashboards"
     parent="hr.menu_hr_employee_payroll"
     groups="base.group_user"

@@ -70,7 +70,7 @@ class ProcessoAudit(models.Model):
     #  bcampi attività dell'audit
     requisiti_ids = fields.One2many('processo.audit.requisito', 'audit_id')
     indicatori_ids = fields.One2many('processo.audit.indicatore', 'audit_id')
-    documentazione_ids = fields.One2many('evidenza.documentale', 'equipment_id')
+    documentazione_ids = fields.One2many('evidenza.documentale', 'audit_id')
 
     # campi esito e validazione
     miglioramenti = fields.Html()

@@ -128,9 +128,12 @@ class EmployeeChart(http.Controller):
         """funzione che genera la lista di dipendenti che appartengono ad una certa funzione aziendale"""
 
         html_list = "<ul style='list-style:none; padding:0;'>"
-        for employee in job_id.employee_ids:
-            if employee.name:
-                html_list += "<li>" + employee.name + "</li>"
+        mansioni_svolte = request.env['hr.job.svolta'].sudo().search([('employee_id', '!=', False), ('job_id', '=', job_id.id)])
+        employee_ids = []
+        for mansione in mansioni_svolte:
+            if mansione.employee_id.id not in employee_ids and mansione.employee_id.name:
+                html_list += "<li>" + mansione.employee_id.name + "</li>"
+                employee_ids.append(mansione.employee_id.id)
         html_list += "</ul>"
         return html_list
 

@@ -38,7 +38,8 @@ class EmployeeChart(http.Controller):
 
     @http.route('/get/parent/job', type='json', auth='public', methods=['POST'], csrf=False)
     def get_job_ids(self):
-        "funzione per recuperare la funzione aziendale all'apice"
+        """funzione per recuperare la funzione aziendale all'apice
+            utilizzata solo dal primo livello"""
         jobs = request.env['hr.job'].sudo().search([('parent_id', '=', False)])
         names = []
         key = []
@@ -57,6 +58,7 @@ class EmployeeChart(http.Controller):
                 "These jobs have no upper job %s" % (names))
 
     def get_lines(self, loop_count):
+        """funzione per creare le linee di collegamento tra le funzioni aziendali"""
         if loop_count:
             lines = """<tr class='lines'><td colspan='""" + str(loop_count) + """'>
                 <div class='downLine'></div></td></tr><tr class='lines'>"""
@@ -75,39 +77,62 @@ class EmployeeChart(http.Controller):
             return lines
 
     def get_nodes(self, child_ids):
+        """funzione di renderizzazione dei figli di una funzine aziendale """
+
         if child_ids:
             child_nodes = """<tr>"""
             for child in child_ids:
+                sigla_fa = ""
+                if child.sigla_fa:
+                    sigla_fa = ' (' + child.sigla_fa + ')'
+                employee_list = self.get_fa_employee_ids(child)
                 child_table = """<td colspan='""" + str(2) + """'>
-                    <table><tr><td><div>"""
-                view = """ <div id='""" + str(child.id) + """' class='o_level_1'><a>
-                    <div id='""" + str(child.id) + """' class="o_employee_border">
-                    </div>
-                    <div class='employee_name'><p>""" + str(child.name) + """</p>
-                    </div></a></div>"""
+                    <table class='mx-auto'><tr><td><div>"""
+                view = """
+                    <div id='""" + str(child.id) + """' class='o_level_1'>
+                        <div id='""" + str(child.id) + """' class="o_employee_border"></div>
+                        <div class='border d-inline-block p-4'>
+                            <h2>""" + str(child.name) + sigla_fa +"""</h2>""" + employee_list + """
+                        </div>
+                    </div>"""
                 child_nodes += child_table + view + """</div></td></tr></table></td>"""
             nodes = child_nodes + """</tr>"""
             return nodes
 
     @http.route('/get/parent/child', type='json', auth='user', methods=['POST'], csrf=False)
     def get_parent_child(self, job_id):
-        """funzione per trovare le funzioni aziendali figli una funzione aziendale padre"""
+        """funzione per trovare le funzioni aziendali figlie una funzione aziendale padre.
+         utilizzata solo dal primo livello"""
 
         job_id = request.env['hr.job'].sudo().browse(job_id)
         child_job_ids = job_id.child_ids
-
+        sigla_fa = ""
+        if job_id.sigla_fa:
+            sigla_fa = ' (' + job_id.sigla_fa + ')'
+        employee_list = self.get_fa_employee_ids(job_id)
         table = """<table><tr><td colspan='""" + str(len(child_job_ids) * 2) + """'><div class="node">"""
-        view = """ <div id="parent" class='o_chart_head'><a>
-            <div id='""" + str(job_id.id) + """' class="o_employee_border">
-            </div>
-            <div class='employee_name o_width'><p>""" + str(job_id.name) + """</p>
-            </div></a></div>"""
+        view = """<div id="parent" class='o_chart_head'>
+                        <div id='""" + str(job_id.id) + """' class="o_employee_border"></div>
+                        <div class='border d-inline-block p-4'>
+                            <h2>""" + str(job_id.name) + sigla_fa +"""</h2>""" + employee_list + """
+                        </div>
+                    </div>"""
         table += view + """</div></td></tr>"""
         loop_len = len(child_job_ids)*2
         lines = self.get_lines(loop_len)
         nodes = self.get_nodes(child_job_ids)
         table += lines + nodes
         return {'html': table, 'child_ids': child_job_ids.ids}
+
+    def get_fa_employee_ids(self, job_id):
+        """funzione che genera la lista di dipendenti che appartengono ad una certa funzione aziendale"""
+
+        html_list = "<ul style='list-style:none; padding:0;'>"
+        for employee in job_id.employee_ids:
+            if employee.name:
+                html_list += "<li>" + employee.name + "</li>"
+        html_list += "</ul>"
+        return html_list
 
     @http.route('/get/child/data', type='json', auth='user', methods=['POST'], csrf=False)
     def get_child_data(self, click_id):

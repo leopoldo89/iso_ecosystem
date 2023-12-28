@@ -6,22 +6,23 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <group>
-                        <group >
+                    <group col="3">
+                        <group colspan="1">
                             <field name="name" string="Nome Audit" />
-                            <field name="processo_id" string="processo"/>
+                            <field name="processo_id" string="Processo"/>
                             <field name="data_audit"  />
                             <field name="inizio_periodo" />
                             <field name="fine_periodo" />
                             <field name="tipo_audit" />
-                            <field name="data_audit_precedente" />
+                        </group>
+                        <group colspan="1">
+                            <field name="data_audit_precedente" string="Data Audit Precedente" />
                             <field name="auditor_interno_id" />
                             <field name="auditor_esterno_id" />
                             <field name="campo_applicazione" />
-                        </group>
-                        <group>
                             <field name="valutazione_finale_indicatori" />
-                            <field name="note_finali" />
+                        </group>
+                        <group colspan="1">                            
                             <field name="validatore_finale" />
                             <field name="validazione" />
                             <field name="data_prossimo_audit" />
@@ -31,17 +32,67 @@
 
                     <notebook>
 
+                        <page string="Requisiti" name="requisiti">
+                            <separator string="Requisiti" />
+                            <field name="requisiti_ids">
+                                <tree editable="bottom">                                    
+                                    <field name="name" string="Nome" />
+                                    <field name="voto"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Indicatori" name="indicatori">
+                            <separator string="Indicatori" />
+                            <field name="indicatori_ids">
+                                <tree editable="bottom">
+                                    <field name="indicatore_id" string="Indicatore" />
+                                    <field name="previsto"/>
+                                    <field name="valore_riscontrato"/>
+                                    <field name="note" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Evidenze documentali" name="evidenze_documentali">
+                            <separator string="Evidenze documentali" />
+                            <field name="documentazione_ids">
+                                <tree editable="bottom">
+                                    <field name="date" string="Data" />
+                                    <field name="description" string="Descrizione"/>
+                                    <field name="attachment_name" invisible="1"/>
+                                    <field name="attachment" filename="attachament_name" widget="binary" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field>
+                        </page>
+
                         <page string="RNC" name="rnc">
                             <field name="non_conformita_ids">
                                 <tree editable="bottom">
-                                    <field name="name" string="identificativo" readonly="1" optional="show"/>
+                                    <field name="name" string="Identificativo" readonly="1" optional="show"/>
                                     <field name="processo_id" invisible="1"/>
                                     <field name="nc_data" string="NC Del"/>
-                                    <field name="nc_tipologia" strin="Tipo di NC" optional="show"/>
-                                    <field name="description" strin="Cosa è Successo?" />
+                                    <field name="nc_tipologia" string="Tipo di NC" optional="hide"/>
+                                    <field name="description" string="Cosa è Successo?" optional="hide" />
                                     <field name="priority" widget="priority"/>
                                     <field name="nc_data_risoluzione" string="Risolta il" />
-                                    <field name="nc_risolta_da" string="Risolta Da" optional="show"/>
+                                    <field name="nc_risolta_da" string="Risolta da" optional="hide"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Azioni Correttive?" name="azioni_correttive">
+                            <field name="azioni_correttive_ids">
+                                <tree>
+                                    <field name="data_apertura" />
+                                    <field name="descrizione" string="Descrizione/Motivazioni"/>
+                                    <field name="anno" optional="show"/>
+                                    <field name="importanza" optional="show"/>
+                                    <field name="riscontri" optional="show"/>
+                                    <field name="esito_finale" />
+                                    <field name="chiusura_ac" string="Chiusura della AC" />
                                 </tree>
                             </field>
                         </page>
@@ -70,54 +121,8 @@
                             </field>
                         </page>
 
-                        <page string="Azioni Correttive" name="azioni_correttive">
-                            <field name="azioni_correttive_ids">
-                                <tree>
-                                    <field name="data_apertura" />
-                                    <field name="descrizione" string="Descrizione/Motivazioni"/>
-                                    <field name="anno" optional="show"/>
-                                    <field name="importanza" optional="show"/>
-                                    <field name="riscontri" optional="show"/>
-                                    <field name="esito_finale" />
-                                    <field name="chiusura_ac" string="Chiusura della AC" />
-                                </tree>
-                            </field>
-                        </page>
-
-                        <page string="Attività dell'audit" name="attivita_audit">
-                            <separator string="Requisiti" />
-                            <field name="requisiti_ids">
-                                <tree editable="bottom">
-                                    <field name="name" string="Nome" />
-                                    <field name="voto"/>
-                                    <field name="note"/>
-                                </tree>
-                            </field>
-
-                            <separator string="Indicatori" />
-                            <field name="indicatori_ids">
-                                <tree editable="bottom">
-                                    <field name="indicatore_id" string="Indicatore" />
-                                    <field name="previsto"/>
-                                    <field name="valore_riscontrato"/>
-                                    <field name="note" />
-                                </tree>
-                            </field>
-
-                            <separator string="Evidenze documentali" />
-                            <field name="documentazione_ids">
-                                <tree editable="bottom">
-                                    <field name="date" string="Data" />
-                                    <field name="description" string="Descrizione"/>
-                                    <field name="attachment_name" invisible="1"/>
-                                    <field name="attachment" filename="attachament_name" widget="binary" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
-                                    <field name="note"/>
-                                </tree>
-                            </field>
-                        </page>
-
-                        <page string="Esito e Validazione" name="esito_validazione">
-                            <separator string="Miglioramente da Attuare" />
+                        <page string="Miglioramenti" name="esito_validazione">
+                            <separator string="Miglioramenti da Attuare" />
                             <field name="miglioramenti" />
 
                             <separator string="FA da informare" />
@@ -146,6 +151,12 @@
                                 </tree>
                             </field>
                         </page>
+
+                        <page string="Note finali" name="note_finali">
+                            <separator string="Note finali" />
+                            <field name="note_finali" />
+                        </page>
+
                     </notebook>
 
                 </sheet>
@@ -175,7 +186,7 @@
 
     <!--  VISTA DI RICERCA   -->
     <record id="view_processo_audit_search" model="ir.ui.view">
-        <field name="name">>view_processo_audit_search</field>
+        <field name="name">view_processo_audit_search</field>
         <field name="model">processo.audit</field>
         <field name="arch" type="xml">
             <search string="Ricerca">

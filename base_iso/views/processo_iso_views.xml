@@ -15,32 +15,12 @@
                         </group>
 
                     </group>
-                    <group>
-                        <group string="Input" name="input">
-                            <field name="input_ids"  context="{'default_is_input': True}">
-                                <tree editable="bottom" >
-                                    <field name="descrizione"  />
-                                    <field name="rilevanza" />
-                                    <field name="is_input" invisible="1" />
-                                </tree>
-                            </field>
-                        </group>
-                        <group string="Output" name="output">
-                            <field name="output_ids"  context="{'default_is_input': False}">
-                                <tree editable="bottom">
-                                    <field name="descrizione"  />
-                                    <field name="rilevanza" />
-                                    <field name="is_input" invisible="1" />
-                                </tree>
-                            </field>
-                        </group>
-                    </group>
                     <notebook >
                         <page string="Indicatori" name="indicatori">
                             <field name="indicatori_ids">
                                 <tree editable="bottom">
                                     <field name="name" />
-                                    <field name="anno"  />
+                                    <field name="anno" widget="integer"/>
                                     <field name="descrizione" />
                                     <field name="strumenti_monitoraggio" string="Strumenti di Monitoraggio" />
                                     <field name="misurazione" />
@@ -66,7 +46,7 @@
                             <field name="azioni_correttive_ids">
                                 <tree>
                                     <field name="descrizione" string="Descrizione/Motivazioni"/>
-                                    <field name="anno" />
+                                    <field name="anno" widget="integer" />
                                     <field name="data_apertura" />
                                     <field name="importanza" />
                                     <field name="riscontri" />
@@ -108,6 +88,28 @@
                                 </tree>
                             </field>
                         </page>
+                        <page string="INPUT-OUTPUT" name="inputoutput">
+                            <group>
+                                <group string="Input" name="input">
+                                    <field name="input_ids"  context="{'default_is_input': True}">
+                                        <tree editable="bottom" >
+                                            <field name="descrizione"  />
+                                            <field name="rilevanza" />
+                                            <field name="is_input" invisible="1" />
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group string="Output" name="output">
+                                    <field name="output_ids"  context="{'default_is_input': False}">
+                                        <tree editable="bottom">
+                                            <field name="descrizione"  />
+                                            <field name="rilevanza" />
+                                            <field name="is_input" invisible="1" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                        </page>
                     </notebook>
 
                 </sheet>
@@ -136,7 +138,7 @@
 
     <!--  VISTA DI RICERCA   -->
     <record id="view_processo_iso_search" model="ir.ui.view">
-        <field name="name">>view_processo_iso_search</field>
+        <field name="name">view_processo_iso_search</field>
         <field name="model">processo.iso</field>
         <field name="arch" type="xml">
             <search string="Ricerca">

@@ -12,7 +12,8 @@ class ProcessoIsoIndicatore(models.Model):
     strumenti_monitoraggio = fields.Char()
     misurazione = fields.Char()
     resoconto = fields.Text()
-    valore_indicatore = fields.Char()
+    tipo_valore_previsto = fields.Selection(selection=[('percentuale', 'Percentuale'), ('valore_numerico', 'Valore Numerico')])
+    valore_previsto = fields.Float()
 
 
 class ProcessoIsoInputOutput(models.Model):

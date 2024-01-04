@@ -6,9 +6,10 @@ class ProcessoAuditRequisito(models.Model):
     _name = 'processo.audit.requisito'
 
     name = fields.Char()
-    voto = fields.Selection([('si', 'SI'), ('si_no', 'SI/NO'), ('no', 'NO')])
     note = fields.Text()
     audit_id = fields.Many2one('processo.audit')
+    voto = fields.Selection(selection=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'),
+                                       ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')])
 
 
 class ProcessoAuditIndicatore(models.Model):
@@ -16,10 +17,15 @@ class ProcessoAuditIndicatore(models.Model):
     _name = 'processo.audit.indicatore'
 
     audit_id = fields.Many2one('processo.audit')
+    indicatore_aggiuntivo = fields.Boolean()
     indicatore_id = fields.Many2one('processo.iso.indicatore')
-    previsto = fields.Text()
-    valore_riscontrato = fields.Text()
+    tipo_valore_previsto = fields.Selection(selection=[('percentuale', 'Percentuale'),
+                                                       ('valore_numerico', 'Valore Numerico')])
+    previsto = fields.Float()
+    valore_riscontrato = fields.Float()
     note = fields.Text()
+    valutazione = fields.Selection(selection=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'),
+                                              ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')])
 
 
 class ProcessoAuditInfoCollabortatore(models.Model):
@@ -77,4 +83,15 @@ class ProcessoAudit(models.Model):
     fa_da_informare_ids = fields.One2many('processo.audit.info.collaboratore', 'audit_id')
     ac_da_creare_ids = fields.One2many('azione.correttiva', 'audit_da_creare_id')
 
+    @api.onchange('processo_id')
+    def onchange_processo_id(self):
+        if self.processo_id:
+            lines = []
+            for indicatore in self.processo_id.indicatori_ids:
+                lines.append((0,0, {
+                    'indicatore_id': indicatore.id,
+                    'tipo_valore_previsto': indicatore.tipo_valore_previsto,
+                    'previsto': indicatore.valore_previsto
+                }))
+            self.indicatori_ids = lines
 

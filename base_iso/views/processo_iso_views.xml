@@ -24,7 +24,8 @@
                                     <field name="descrizione" />
                                     <field name="strumenti_monitoraggio" string="Strumenti di Monitoraggio" />
                                     <field name="misurazione" />
-                                    <field name="valore_indicatore" />
+                                    <field name="tipo_valore_previsto" />
+                                    <field name="valore_previsto" />
                                 </tree>
                             </field>
                         </page>

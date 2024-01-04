@@ -9,7 +9,8 @@
     'category': 'Tools',
     'version': '16.0.1',
     'depends': ['base','partner_autocomplete', 'contacts', 'hr', 'hr_skills', 'product', 'stock',
-                'quality_control', 'partner_manual_rank', 'mrp', 'maintenance', 'mrp_maintenance', 'stock_barcode', 'project'],
+                'quality_control', 'partner_manual_rank', 'mrp', 'maintenance', 'mrp_maintenance',
+                'stock_barcode', 'project', 'hr_organizational_chart'],
     'data': [
         'security/ir.model.access.csv',
         'data/data.xml',

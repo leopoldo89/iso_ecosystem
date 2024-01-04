@@ -96,4 +96,11 @@
         </field>
     </record>
 
+    <menuitem id="base_iso_dipendenti_menu_section" name="Dipendenti" sequence="5"
+              parent="base_iso.base_iso_menu_dipendenti"/>
+    <menuitem id="base_iso_dipendenti_iso_menu" name="Dipendenti" sequence="1"
+              parent="base_iso.base_iso_dipendenti_menu_section" action="hr.open_view_employee_list_my"/>
+    <menuitem id="base_iso_organigramma_iso_menu" name="Organigramma" action="hr_organizational_chart.action_organizational_chart"
+              parent="base_iso.base_iso_dipendenti_menu_section" sequence="4"/>
+
 </odoo>

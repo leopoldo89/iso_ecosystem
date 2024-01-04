@@ -70,7 +70,7 @@
                                     <field name="date" string="Data" />
                                     <field name="description" string="Descrizione"/>
                                     <field name="attachment_name" invisible="1"/>
-                                    <field name="attachment" filename="attachament_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="attachment" filename="attachment_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
                                     <field name="sezione_modello" invisible="1" />
                                 </tree>
                             </field>
@@ -134,7 +134,7 @@
                                     <field name="date" string="Data" />
                                     <field name="description" string="Descrizione"/>
                                     <field name="attachment_name" invisible="1"/>
-                                    <field name="attachment" filename="attachament_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="attachment" filename="attachment_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
                                     <field name="sezione_modello" invisible="1" />
                                 </tree>
                             </field>
@@ -148,7 +148,7 @@
                                     <field name="date" string="Data" />
                                     <field name="description" string="Descrizione"/>
                                     <field name="attachment_name" invisible="1"/>
-                                    <field name="attachment" filename="attachament_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="attachment" filename="attachment_name" widget="binary"  string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
                                     <field name="sezione_modello" invisible="1" />
                                 </tree>
                             </field>

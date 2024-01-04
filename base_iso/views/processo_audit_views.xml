@@ -35,9 +35,9 @@
                         <page string="Requisiti" name="requisiti">
                             <separator string="Requisiti" />
                             <field name="requisiti_ids">
-                                <tree editable="bottom">                                    
+                                <tree editable="bottom" >
                                     <field name="name" string="Nome" />
-                                    <field name="voto"/>
+                                    <field name="voto" width="10%"/>
                                     <field name="note"/>
                                 </tree>
                             </field>
@@ -48,9 +48,12 @@
                             <field name="indicatori_ids">
                                 <tree editable="bottom">
                                     <field name="indicatore_id" string="Indicatore" />
+                                    <field name="indicatore_aggiuntivo" />
+                                    <field name="tipo_valore_previsto" string="Tipo Valore"/>
                                     <field name="previsto"/>
-                                    <field name="valore_riscontrato"/>
+                                    <field name="valore_riscontrato" string="Riscontrato"/>
                                     <field name="note" />
+                                    <field name="valutazione" string="Voto" width="10%"/>
                                 </tree>
                             </field>
                         </page>
@@ -62,7 +65,7 @@
                                     <field name="date" string="Data" />
                                     <field name="description" string="Descrizione"/>
                                     <field name="attachment_name" invisible="1"/>
-                                    <field name="attachment" filename="attachament_name" widget="binary" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
+                                    <field name="attachment" filename="attachment_name" widget="binary" string="Allegato Pdf" options="{'accepted_file_extensions': '.pdf'}"/>
                                     <field name="note"/>
                                 </tree>
                             </field>

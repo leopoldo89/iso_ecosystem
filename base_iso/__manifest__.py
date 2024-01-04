@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "ISO certification 9001, 14001, 45001",
-    'summary': "ISO certification 9001, 14001, 45001",
-    'description': "ISO certification 9001, 14001, 45001",
+    'name': "ISO certification 9001, 14001, 26000, 45001",
+    'summary': "ISO certification 9001, 14001, 26000, 45001",
+    'description': "ISO certification 9001, 14001, 26000, 45001",
     'author': "Piemmeesse srl",
     'website': "https://www.piemmeesee.com/",
     'license': 'LGPL-3',
@@ -33,6 +33,12 @@
         'views/project_project_views.xml',
         'views/riesame_direzione_views.xml',
         'views/hr_employee_views.xml',
+        'views/iso_14001.xml',
+        'views/iso_14001_views.xml',
+        'views/iso_26000.xml',
+        'views/iso_26000_views.xml',
+        'views/iso_45001.xml',
+        'views/iso_45001_views.xml',
     ],
     "images": ['static/description/icon.png'],
     "application": True

@@ -1,0 +1,3 @@
+<odoo>
+    <menuitem id="base_iso_menu_root_45001" name="45001" sequence="5" action="action_45001" web_icon="base_iso,static/description/icon.png"/>
+</odoo>

@@ -95,11 +95,11 @@ class ProcessoAudit(models.Model):
                 }))
             self.indicatori_ids = lines
 
-            lines = []
-            processi_coinvolti_rnc = self.env['processo.iso.coinvolto'].search([('processo_id', '=', self.processo_id.id)])
-            for processo_coinvolto in processi_coinvolti_rnc:
-                if processo_coinvolto.quality_alert_id:
-                    lines.append((4, processo_coinvolto.quality_alert_id.id))
-            self.non_conformita_ids = lines
+            # lines = []
+            # processi_coinvolti_rnc = self.env['processo.iso.coinvolto'].search([('processo_id', '=', self.processo_id.id)])
+            # for processo_coinvolto in processi_coinvolti_rnc:
+            #     if processo_coinvolto.quality_alert_id:
+            #         lines.append((4, processo_coinvolto.quality_alert_id.id))
+            # self.non_conformita_ids = lines
 
 

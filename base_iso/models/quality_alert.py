@@ -112,7 +112,7 @@ class RapportoNonconformitaAlert(models.Model):
 
     # todo rimuovere perchè modificata la relazione da o2m a m2m
     # processo_id = fields.Many2one('processo.iso')
-    audit_id = fields.Many2one('processo.audit')
+    # audit_id = fields.Many2one('processo.audit')
 
     @api.onchange('imputato_a')
     def onchange_imputato_a(self):

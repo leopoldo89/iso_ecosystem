@@ -51,7 +51,7 @@ class ProcessoAudit(models.Model):
     # campi anagrafica
     name = fields.Char()
 
-    processo_id = fields.Many2one('processo.iso')  # relazione a processo
+    processo_id = fields.Many2one('processo.iso', required=True)  # relazione a processo
     inizio_periodo = fields.Date()
     fine_periodo = fields.Date()
     data_audit = fields.Date()
@@ -68,7 +68,7 @@ class ProcessoAudit(models.Model):
     data_prossimo_audit = fields.Date()
 
     # campi info
-    non_conformita_ids = fields.One2many('quality.alert', 'audit_id')
+    non_conformita_ids = fields.Many2many('quality.alert')
     azioni_correttive_ids = fields.One2many('azione.correttiva', 'audit_id')
     rischi_ids = fields.One2many('rischio.iso', 'audit_id')
     opportunita_ids = fields.One2many('opportunita.iso', 'audit_id')
@@ -85,8 +85,9 @@ class ProcessoAudit(models.Model):
 
     @api.onchange('processo_id')
     def onchange_processo_id(self):
+        # se processo impostato prendo tutti gli indicatori del processo e li metto nell'audit
         if self.processo_id:
-            lines = []
+            lines = [(5, 0)]
             for indicatore in self.processo_id.indicatori_ids:
                 lines.append((0,0, {
                     'indicatore_id': indicatore.id,
@@ -94,12 +95,26 @@ class ProcessoAudit(models.Model):
                     'previsto': indicatore.valore_previsto
                 }))
             self.indicatori_ids = lines
+            self.onchange_periodo()
 
-            # lines = []
-            # processi_coinvolti_rnc = self.env['processo.iso.coinvolto'].search([('processo_id', '=', self.processo_id.id)])
-            # for processo_coinvolto in processi_coinvolti_rnc:
-            #     if processo_coinvolto.quality_alert_id:
-            #         lines.append((4, processo_coinvolto.quality_alert_id.id))
-            # self.non_conformita_ids = lines
+    @api.onchange('inizio_periodo', 'fine_periodo')
+    def onchange_periodo(self):
+        if self.processo_id:
+
+            # prendo le rnc del processo e le collego all'audit in base al periodo
+            nc_ids = []
+            for nc in self.processo_id.non_conformita_ids:
+                if not nc.nc_data:
+                    nc_ids.append(nc.id)
+                else:
+                    nc_data_valida = True
+                    if self.inizio_periodo and nc.nc_data.date() <= self.inizio_periodo:
+                        nc_data_valida = False
+                    if self.fine_periodo and nc.nc_data.date() >= self.fine_periodo:
+                        nc_data_valida = False
+
+                    if nc_data_valida:
+                        nc_ids.append(nc.id)
+            self.non_conformita_ids = [(6, 0, nc_ids)]
 
 

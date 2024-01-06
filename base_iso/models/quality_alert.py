@@ -4,10 +4,57 @@ from odoo import api, models, fields
 class ProcessoIsoRnc(models.Model):
 
     _name = 'processo.iso.coinvolto'
-    processo_id = fields.Many2one('processo.iso')
+    processo_id = fields.Many2one('processo.iso', required=True)
     tipo = fields.Selection(selection=[('primario', 'Primario'), ('supporto', 'Supporto'), ('sistema', 'Sistema')])
     quality_alert_id = fields.Many2one('quality.alert')
     azione_correttiva_id = fields.Many2one('azione.correttiva')
+
+
+    def update_processo_iso(self, processo_id, old_processo_id, quality_alert_id):
+        """funzione per prendere il processo coinvolto inserito nella rnc e
+            collegare/scollegare dunque la rnc al processo iso"""
+
+        # aggancio rnc a processo coinvolto
+        if processo_id:
+            nuovo_processo_id = self.env['processo.iso'].browse(processo_id)
+            nuovo_processo_id.write({'non_conformita_ids': [(4, quality_alert_id)]})
+
+        # scollego rnc da processo coinvolto
+        if old_processo_id:
+            old_processo_id = self.env['processo.iso'].browse(old_processo_id)
+            old_processo_id.write({'non_conformita_ids': [(3, quality_alert_id)]})
+
+    def write(self, vals):
+        """modifico la relazione rnc-processo solo se è cambianto il processo_id del processo coinvolto"""
+
+        for rec in self:
+            new_processo_id = vals.get('processo_id', False)
+
+            # modifica processo sgancio la rnc dal vecchio processo e la aggancio al nuovo
+            if new_processo_id and rec.processo_id and rec.processo_id.id != new_processo_id and rec.quality_alert_id:
+                rec.update_processo_iso(new_processo_id, rec.processo_id.id, rec.quality_alert_id.id)
+
+        res = super(ProcessoIsoRnc, self).write(vals)
+        return res
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        """creo un processo coinvolto significa che devo aggancianre la rnc al processo iso che sto aggiunendo"""
+
+        created_records = super().create(vals_list)
+        for rec in created_records:
+            if rec.processo_id and rec.quality_alert_id:
+                self.update_processo_iso(rec.processo_id.id, False, rec.quality_alert_id.id)
+
+        return created_records
+
+    def unlink(self):
+        """eliminio la riga di processo coinvolto dunque bisogna sganciare la rnc dal processo sio"""
+
+        for rec in self:
+            rec.update_processo_iso(False, rec.processo_id.id, rec.quality_alert_id.id)
+        return super(ProcessoIsoRnc, self).unlink()
+
 
 
 class RapportoNonconformitaAlert(models.Model):
@@ -62,7 +109,9 @@ class RapportoNonconformitaAlert(models.Model):
     satisfaction_id = fields.Many2one('res.partner.satisfaction')
     employee_qualification_id = fields.Many2one('hr.employee.qualification')
     employee_formazione_qualification_id = fields.Many2one('hr.employee.qualification')
-    processo_id = fields.Many2one('processo.iso')
+
+    # todo rimuovere perchè modificata la relazione da o2m a m2m
+    # processo_id = fields.Many2one('processo.iso')
     audit_id = fields.Many2one('processo.audit')
 
     @api.onchange('imputato_a')

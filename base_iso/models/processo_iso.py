@@ -45,7 +45,7 @@ class ProcessoIso(models.Model):
     indicatori_ids = fields.One2many('processo.iso.indicatore', 'processo_id')
 
     # campi INFO
-    non_conformita_ids = fields.One2many('quality.alert', 'processo_id')
+    non_conformita_ids = fields.Many2many('quality.alert')
     azioni_correttive_ids = fields.One2many('azione.correttiva', 'processo_id')
     rischi_ids = fields.One2many('rischio.iso', 'processo_id')
     opportunita_ids = fields.One2many('opportunita.iso', 'processo_id')

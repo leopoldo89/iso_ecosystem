@@ -33,7 +33,6 @@
                             <field name="non_conformita_ids">
                                 <tree editable="bottom">
                                     <field name="name" string="identificativo" readonly="1" optional="show"/>
-                                    <field name="processo_id" invisible="1"/>
                                     <field name="nc_data" string="Del"/>
                                     <field name="nc_tipologia" strin="Tipo di NC" />
                                     <field name="description" strin="Cosa è Successo?" />
